@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_lst.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:55:30 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/16 13:13:54 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/01/17 15:44:51 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }	t_env;
+
 //in and out -> file name, null if not specified
 //red_in and red_out -> redirection type, 0 by default, 1 if double
 //red_in == -1 if file do not exist

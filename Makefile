@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+         #
+#    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/01/14 19:22:51 by lsuau            ###   ########.fr        #
+#    Updated: 2022/01/17 15:47:58 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAMEX = minishell
 
 INC = minishell.h minishell_lst.h
 
-SRC = main.c stock_1.c env.c parsing.c parsing_error.c pipe_split.c
+SRC = main.c stock_1.c stock_2.c env.c parsing.c parsing_error.c pipe_split.c command.c
 
 GCC = gcc #-Wall -Werror -Wextra
 

@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:32:35 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/17 14:33:06 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:10:56 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "minishell_lst.h"
@@ -45,5 +46,14 @@ int		stlen(const char *s);
 char	*ft_substr(char const	*s, int start, int len);
 char	*ft_strdup(const char *s1);
 char	**free_tab(char	**tab);
+
+// command.c
+void	ft_pwd(t_env *env);
+void	ft_echo(t_cmd *cmd);
+void	ft_env(t_env *env);
+void	ft_unset(t_env *env, t_cmd *cmd);
+
+// stock_2.c
+char	*ft_strjoin(char *s1, char *s2);
 
 #endif
