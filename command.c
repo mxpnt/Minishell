@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 14:45:27 by mapontil          #+#    #+#             */
-/*   Updated: 2022/01/17 16:16:10 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/01/21 11:12:50 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_unset(t_env *env, t_cmd *cmd)
 	}
 }
 
-void	ft_exit(t_cmd *cmd)
+void	ft_exit(t_cmd *cmd, t_data *data)
 {
 	int	i;
 
@@ -92,4 +92,6 @@ void	ft_exit(t_cmd *cmd)
 		i++;
 	if (i != 1)
 		return ;
+	else
+		data->run = 0;
 }

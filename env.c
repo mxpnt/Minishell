@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:51:00 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/16 15:24:09 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/01/19 15:54:16 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,17 @@ t_env	*env_init(t_data *data, char **envp)
 		x++;
 	}
 	return (env);
+}
+
+int	env_lstsize(t_env *env)
+{
+	int	x;
+
+	x = 0;
+	while (env)
+	{
+		x++;
+		env = env->next;
+	}
+	return (x);
 }
