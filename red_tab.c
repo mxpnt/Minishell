@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:55:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/19 20:06:06 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/01/26 14:35:43 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,16 @@ int	red_stlen(char *line)
 {
 	int		x;
 	char	c;
+	int		y;
 
 	x = 0;
+	y = 0;
 	c = line[x];
 	while (line[x] == c)
 		x++;
+	while (line[x + y] == ' ')
+		y++;
+	ft_strcpy(line + x, line + x + y);
 	while (line[x])
 	{
 		if (line[x] == '\'' || line[x] == '"')
@@ -54,23 +59,6 @@ int	red_stlen(char *line)
 	}
 	return (x);
 }
-
-// void	remove_red(char *line, int x)
-// {
-// 	int		n;
-// 	char	c;
-
-// 	n = 0;
-// 	c = line[x];
-// 	while (line[x + n] == c)
-// 		n++;
-// 	while (line[x + n] && (line[x + n] == ' ' || line[x + n] == '>' || line[x + n] == '<'))
-// 	{
-// 		if (line[x + n] == '\'' || line[x + n] == '"')
-// 			n = skip_quote(line, x + n) - x;
-// 		n++;
-// 	}
-// }
 
 char	*red_substr(char *line, char c)
 {
@@ -112,6 +100,7 @@ char	**fill_red_tab(char *line, char c)
 		tab[n] = red_substr(line, c);
 		if (!tab[n])
 			return (free_tab(tab));
+		red_remove_quote(tab[n]);
 		n++;
 	}
 	return (tab);

@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:46:04 by mapontil          #+#    #+#             */
-/*   Updated: 2022/01/19 17:19:48 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/01/24 16:50:09 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,23 @@ void	ft_strcpy(char *dst, const char *src)
 	{
 		dst[x] = src[x];
 		x++;
+	}
+	dst[x] = 0;
+	return ;
+}
+
+void	ft_strcat(char *dst, const char *src)
+{
+	int	x;
+	int	y;
+
+	x = stlen(dst);
+	y = 0;
+	while (src[y])
+	{
+		dst[x] = src[y];
+		x++;
+		y++;
 	}
 	dst[x] = 0;
 	return ;

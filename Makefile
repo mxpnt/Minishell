@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+         #
+#    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/01/21 13:28:28 by lsuau            ###   ########.fr        #
+#    Updated: 2022/01/26 15:01:16 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,20 +17,21 @@ INC = minishell.h minishell_struct.h minishellbis.h
 SRC =	main.c \
 		stock_1.c \
 		stock_2.c \
+		stock_3.c \
 		env.c \
 		parsing.c \
 		parsing_error.c \
 		parsing_error_2.c \
 		pipe_split.c \
 		env_in_line.c \
+		env_in_line_2.c \
 		red_parsing.c \
 		red_tab.c \
+		red_process.c \
 		cmd_lst.c \
-		\
 		command.c \
 		ft_split.c \
-		pipex.c \
-		signal.c \
+		pipex.c
 
 GCC = gcc #-Wall -Werror -Wextra
 
@@ -43,7 +44,7 @@ ${OBJ_DIR}%.o : %.c ${INC} Makefile
 	${GCC} -c $< -o $@
 
 ${NAMEX}: ${OBJ} ${INC}
-	${GCC} ${OBJ} -o ${NAMEX} -lreadline
+	${GCC} ${OBJ} -o ${NAMEX} -lreadline -I  .brew/opt/readline/include/readline
 
 ${OBJ}: | ${OBJ_DIR}
 

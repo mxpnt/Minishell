@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:30:25 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/19 16:41:56 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/01/24 16:57:18 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	cmd_lstclear(t_data *data)
 	t_cmd	*t;
 
 	l = data->cmds;
+	data->cmds = 0;
 	while (l)
 	{
 		t = l->next;
@@ -56,26 +57,26 @@ int	cmd_lstclear(t_data *data)
 char	**env_lst_to_tab(t_env *env)
 {
 	char	**envp;
-	char	*t;
 	int		x;
 
 	x = 0;
-	envp = malloc(sizeof(char) * (env_lstsize(env) + 1));
+	envp = malloc(sizeof(char *) * (env_lstsize(env) + 1));
 	if (!envp)
 		return (0);
 	while (env)
 	{
-		t = ft_strjoin(env->name, "=");
-		envp[x] = ft_strjoin(t, env->value);
-		if (t)
-			free(t);
+		envp[x] = malloc((stlen(env->name) + stlen(env->value) + 2));
 		if (!envp[x])
 			return (free_tab(envp));
+		envp[x][0] = 0;
+		ft_strcat(envp[x], env->name);
+		ft_strcat(envp[x], "=");
+		ft_strcat(envp[x], env->value);
 		x++;
 		env = env->next;
 	}
 	envp[x] = 0;
-	return (0);
+	return (envp);
 }
 
 t_cmd	*cmd_lstnew(t_data *data)

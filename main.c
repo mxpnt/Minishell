@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:24:33 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/21 15:58:36 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:00:41 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	data_init(t_data *data, char **envp)
 	}
 }
 
+// $? pas totalement implementer
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
@@ -34,7 +35,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	data_init(&data, envp);
-	signal(SIGINT, &signal_c);
+	//signal(SIGINT, signal_c);
 	while (data.run)
 	{
 		line = readline("minimush$ ");
@@ -46,6 +47,8 @@ int	main(int argc, char **argv, char **envp)
 			data.run = 0;
 		}
 		le_parsing(&data, line);
+		pipex(data.cmds, data.env, &data);
+		cmd_lstclear(&data);
 		free(line);
 	}
 	env_lstclear(&data);
@@ -63,5 +66,5 @@ void	print_tab(char **tab)
 		printf("%s\n", tab[x]);
 		x++;
 	}
-	free_tab(tab);
+	//free_tab(tab);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:55:30 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/21 11:50:46 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:49:04 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_env
 }	t_env;
 //in and out -> file name, null if not specified
 //red_in and red_out -> redirection type, 0 by default, 1 if double
-//red_in == -1 if file do not exist
+//red_in == -1 if file do not exist, file name will be in *in
 //if red_in == 1, in file must be deleted
 typedef struct s_cmd
 {

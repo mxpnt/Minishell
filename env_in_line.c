@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:37:47 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/21 13:26:54 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/01/24 17:38:47 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	check_env_char(char c)
 {
-	if (!c || c == ' ' || c == '\'' || c == '"')
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	if ((c >= '0' && c <= '9'))
 		return (1);
 	return (0);
 }
@@ -24,9 +26,14 @@ char	*search_env(t_env *env, char *line)
 	int	x;
 
 	x = 0;
-	while (!check_env_char(line[x]))
+	if (line[x] == '?')
 		x++;
-	while (env)
+	else
+	{
+		while (check_env_char(line[x]))
+			x++;
+	}
+	while (env && x)
 	{
 		if (!ft_strncmp(line, env->name, x))
 			return (env->value);
@@ -35,12 +42,32 @@ char	*search_env(t_env *env, char *line)
 	return (0);
 }
 
-char	*insert_env_value(char *line, int x, int dq, char *value)
+char	*insert_value(char *line, int *x, int dq, char *value)
 {
+	int	y;
+
+	y = *x + 1;
+	if (!line[y] || is_spe_env(line[y], dq))
+		*x = *x + 1;
+	else if (!dq && (line[y] == '\'' || line[y] == '"'))
+		ft_strcpy(line + *x, line + y);
+	else if (line[y] >= '0' && line[y] <= '9')
+		ft_strcpy(line + *x, line + y + 1);
+	else
+	{
+		while (check_env_char(line[y]))
+			y++;
+		ft_strcpy(line + *x, line + y);
+		if (value)
+		{
+			line = put_value(line, *x, value);
+			*x += stlen(value);
+		}
+	}
 	return (line);
 }
 
-int	replace_env_line(t_env *env, char **add_line)
+int	replace_env_line(t_env *env, char **old_line)
 {
 	int		x;
 	int		dq;
@@ -48,44 +75,22 @@ int	replace_env_line(t_env *env, char **add_line)
 
 	x = 0;
 	dq = 0;
-	line = *add_line;
+	line = *old_line;
 	while (line[x])
 	{
-		if (line[x] == '\'')
+		if (line[x] == '\'' && !dq)
 			x = skip_quote(line, x);
 		if (line[x] == '"')
 			dq = (dq + 1) % 2;
 		if (line[x] == '$')
 		{
-			line = insert_env_value(line, x, dq, search_env(env, line + x + 1));
+			line = insert_value(line, &x, dq, search_env(env, line + x + 1));
 			if (!line)
 				return (1);
-			*add_line = line;
+			*old_line = line;
 		}
 		else
 			x++;
 	}
 	return (0);
-}
-
-void	remove_wrong_env(char *line)
-{
-	int	x;
-	int	n;
-	int	dq;
-
-	x = 0;
-	while (line[x])
-	{
-		if (line[x] == '\'')
-			x = skip_quote(line, x);
-		if (line[x] == '"')
-			dq = (dq + 1) % 2;
-		if (line[x] == '$')
-		{
-			n = 1;//check_wong_env(line + x);
-		}
-		else
-			x++;
-	}
 }
