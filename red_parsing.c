@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:46:26 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/26 14:41:58 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/02/02 17:18:39 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ int	process_in(t_cmd *cmd, char **in)
 	return (0);
 }
 
+void	empty_redout(char *out)
+{
+	int	fd;
+
+	fd = open(out, O_WRONLY | O_TRUNC);
+	close(fd);
+}
+
 int	process_out(t_cmd *cmd, char **out)
 {
 	int	x;
@@ -57,6 +65,8 @@ int	process_out(t_cmd *cmd, char **out)
 				last = out_no_perm(cmd, out[x]);
 			else if (x == last)
 				cmd->out = ft_strdup(out[x]);
+			else if (!cmd->red_out)
+				empty_redout(out[x]);
 		}
 		else
 			out_no_file(cmd, out[x], last - x);

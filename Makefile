@@ -6,7 +6,7 @@
 #    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/01/26 15:01:16 by mapontil         ###   ########.fr        #
+#    Updated: 2022/02/04 13:46:31 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,11 @@ SRC =	main.c \
 		cmd_lst.c \
 		command.c \
 		ft_split.c \
-		pipex.c
+		pipex.c \
+		cmd_split.c \
+		handle_redirect.c \
+		parsing_path_cmd.c \
+		perror_exit.c
 
 GCC = gcc #-Wall -Werror -Wextra
 

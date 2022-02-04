@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:02:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/26 14:50:03 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/01/31 17:26:07 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,22 @@ void	red_remove_quote(char *s)
 	}
 }
 
-int	check_if_only_space(char *s)
+int	longest_in_tab(char **tab)
 {
 	int	x;
+	int	n;
+	int	len;
 
-	x = 0;
-	while (s[x])
+	n = 0;
+	len = 0;
+	while (tab[n])
 	{
-		if (s[x] != ' ')
-			return (1);
-		x++;
+		x = 0;
+		while (tab[n][x])
+			x++;
+		if (x > len)
+			len = x;
+		n++;
 	}
-	return (0);
+	return (len);
 }

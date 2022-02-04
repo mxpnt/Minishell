@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:55:30 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/24 17:49:04 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/02/04 13:39:51 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ typedef struct s_data
 	t_env	*env;
 	t_cmd	*cmds;
 	int		nb_cmd;
-	int		end[2];
-	int		fd1;
-	int		fd2;
-	int		prev_end;
+	int		fd[2];
+	int		fd_prev;
 	int		error;
 	int		run;
 }	t_data;

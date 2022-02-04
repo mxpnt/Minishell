@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:32:35 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/26 14:50:21 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/01/31 17:27:15 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*put_value(char *line, int x, char *value);
 //cmd format
 int		le_parsing(t_data *data, char *line);
 char	**pipe_split(char *line);
+char	**cmd_split(char *line);
 //-->redirection
 int		red_parsing(t_data *data, t_cmd	*cmd, char *line);
 char	**fill_red_tab(char *line, char c);
@@ -64,7 +65,7 @@ int		skip_quote(char *line, int x);
 void	ft_strcpy(char *dst, const char *src);
 void	ft_strcat(char *dst, const char *src);
 void	write_nl(int fd, char *s);
-int		check_if_only_space(char *s);
+int		longest_in_tab(char **tab);
 //temp
 void	print_tab(char **tab);
 #endif

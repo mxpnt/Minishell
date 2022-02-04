@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:24:33 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/26 15:00:41 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:09:08 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void	data_init(t_data *data, char **envp)
 	}
 }
 
+//pour verfier que le parsing est bon
+//void print_cmd(t_cmd *cmd)
+
 // $? pas totalement implementer
+//la path est inclue dans le parsing, path[0] = 0 si path pas trouver
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
@@ -47,7 +51,8 @@ int	main(int argc, char **argv, char **envp)
 			data.run = 0;
 		}
 		le_parsing(&data, line);
-		pipex(data.cmds, data.env, &data);
+		if (data.cmds)
+			pipex(data.cmds, data.env, &data);
 		cmd_lstclear(&data);
 		free(line);
 	}
@@ -66,5 +71,4 @@ void	print_tab(char **tab)
 		printf("%s\n", tab[x]);
 		x++;
 	}
-	//free_tab(tab);
 }

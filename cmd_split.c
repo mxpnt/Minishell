@@ -1,106 +1,97 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   red_tab.c                                          :+:      :+:    :+:   */
+/*   cmd_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 15:55:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/29 15:51:12 by lsuau            ###   ########.fr       */
+/*   Created: 2022/01/29 15:29:44 by lsuau             #+#    #+#             */
+/*   Updated: 2022/01/29 16:09:08 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	red_count(char *line, char c)
+int	token_count(char *line)
 {
 	int	x;
-	int	nb_red;
+	int	nb_token;
 
 	x = 0;
-	nb_red = 0;
+	nb_token = 0;
 	while (line[x])
 	{
-		if (line[x] == '\'' || line[x] == '"')
-			x = skip_quote(line, x);
-		if (line[x] == c)
+		if (line[x] != ' ')
+			nb_token++;
+		while (line[x] && line[x] != ' ')
 		{
-			nb_red++;
-			while (line[x] == c)
+			if (line[x] == '\'' || line[x] == '"')
+				x = skip_quote(line, x) + 1;
+			else
 				x++;
 		}
-		else if (line[x])
+		while (line[x] == ' ')
 			x++;
 	}
-	return (nb_red);
+	return (nb_token);
 }
 
-int	red_stlen(char *line)
+int	cmd_stlen(char *line)
 {
 	int		x;
-	char	c;
 	int		y;
 
 	x = 0;
 	y = 0;
-	c = line[x];
-	while (line[x] == c)
-		x++;
-	while (line[x + y] == ' ')
-		y++;
-	ft_strcpy(line + x, line + x + y);
 	while (line[x])
 	{
 		if (line[x] == '\'' || line[x] == '"')
 			x = skip_quote(line, x);
-		if (line[x] == ' ' || line[x] == '>' || line[x] == '<' || !line[x])
+		if (!line[x] || line[x] == ' ')
 			return (x);
 		x++;
 	}
 	return (x);
 }
 
-char	*red_substr(char *line, char c)
+char	*cmd_substr(char *line)
 {
-	char	*red;
-	int		len;
 	int		x;
+	int		len;
+	char	*s;
 
 	x = 0;
 	while (line[x])
 	{
-		if (line[x] == '\'' || line[x] == '"')
-			x = skip_quote(line, x);
-		if (line[x] == c)
+		if (line[x] != ' ')
 		{
-			len = red_stlen(line + x);
-			red = ft_substr(line, x, len);
+			len = cmd_stlen(line + x);
+			s = ft_substr(line, x, len);
 			ft_strcpy(line + x, line + x + len);
-			return (red);
+			return (s);
 		}
 		x++;
 	}
 	return (0);
 }
 
-char	**fill_red_tab(char *line, char c)
+char	**cmd_split(char *line)
 {
 	char	**tab;
-	int		nb_red;
+	int		nb_token;
 	int		n;
 
-	nb_red = red_count(line, c);
-	tab = malloc(sizeof(char *) * (nb_red + 1));
+	nb_token = token_count(line);
+	tab = malloc(sizeof(char *) * (nb_token + 1));
 	if (!tab)
 		return (0);
-	tab[nb_red] = 0;
+	tab[nb_token] = 0;
 	n = 0;
-	while (n < nb_red)
+	while (n < nb_token)
 	{
-		tab[n] = red_substr(line, c);
+		tab[n] = cmd_substr(line);
 		if (!tab[n])
 			return (free_tab(tab));
-		red_remove_quote(tab[n]);
 		n++;
 	}
 	return (tab);

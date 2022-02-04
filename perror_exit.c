@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   perror_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/21 11:54:31 by mapontil          #+#    #+#             */
-/*   Updated: 2022/01/25 13:00:25 by mapontil         ###   ########.fr       */
+/*   Created: 2022/02/04 13:42:23 by mapontil          #+#    #+#             */
+/*   Updated: 2022/02/04 13:42:31 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	signal_c(int signum)
+void	ft_perror_exit(const char *str)
 {
-	(void)signum;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	perror(str);
+	exit(-1);
 }

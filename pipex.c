@@ -6,118 +6,88 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:51:42 by mapontil          #+#    #+#             */
-/*   Updated: 2022/01/26 15:10:46 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:42:08 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <errno.h>
 
-void	parsing_path(t_cmd *cmd, t_env *env)
+void	last_cmd(t_cmd *cmd, t_data *data)
 {
-	t_env	*curr;
-	char	**paths;
-	char	*command;
-	int		i;
+	char	*command_path;
+	int		pid;
 
-	i = -1;
-	curr = env;
-	while (curr && stcmp(curr->name, "PATH"))
-		curr = curr->next;
-	if (stcmp(curr->name, "PATH") == 0)
-		paths = ft_split(curr->value, ':');
-	while (paths[++i])
+	pid = fork();
+	if (pid < 0)
+		ft_perror_exit("FORK ");
+	if (pid == 0)
 	{
-		paths[i] = ft_strjoin(paths[i], "/");
-		command = ft_strjoin(paths[i], cmd->cmd[0]);
-		if (access(command, F_OK) == 0)
-			if (execve(command, cmd->cmd, cmd->envp) == -1)
-				return (perror("EXECVE "));
-		free(command);
-		free(paths[i]);
+		if (data->fd_prev)
+		{
+			if (dup2(data->fd_prev, STDIN_FILENO) == -1)
+				ft_perror_exit("DUP2 ");
+			close(data->fd_prev);
+		}
+		if (cmd->in)
+			ft_handle_redirect_in(cmd);
+		if (cmd->out)
+			ft_handle_redirect_out(cmd);
+		command_path = parsing_path(cmd, data->env);
+		if (!command_path)
+			ft_perror_exit("PATH ");
+		if (execve(command_path, cmd->cmd, cmd->envp) == -1)
+			ft_perror_exit("EXECVE ");
 	}
+	if (data->fd_prev)
+		close(data->fd_prev);
+	while (waitpid(-1, &pid, 0) != -1)
+		; // waitpid last cmd to update "$?" and handle signal
 }
 
-// data->fd1 = open(..., O_RDONLY);
-void	ft_fcmd(t_cmd *cmd, t_env *env, t_data *data)
+void	ft_exec(t_cmd *cmd, t_data *data)
 {
-	// if (data->fd1 < 0)
-	// 	return (perror("OPEN "));
-	if (dup2(data->fd1, STDIN_FILENO) < 0)
-		return (perror("DUP2 "));
-	if (dup2(data->end[1], STDOUT_FILENO) < 0)
-		return (perror("DUP2 "));
-	close(data->fd1);
-	close(data->end[1]);
-	close(data->end[0]);
-	parsing_path(cmd, env);
-}
+	char	*command_path;
 
-void	ft_icmd(t_cmd *cmd, t_env *env, t_data *data)
-{
-	if (dup2(data->end[0], STDIN_FILENO) < 0)
-		return (perror("DUP2 "));
-	if (dup2(data->end[1], STDOUT_FILENO) < 0)
-		return (perror("DUP2 "));
-	close(data->end[0]);
-	close(data->end[1]);
-	parsing_path(cmd, env);
-}
-
-// Rajouter condition open pour redirection
-// data->fd2 = open(..., O_CREAT | O_RDWR | O_TRUNC/O_APPEND, 0644);
-void	ft_lcmd(t_cmd *cmd, t_env *env, t_data *data)
-{
-	if (data->fd2 < 0)
-		return (perror("OPEN "));
-	if (dup2(data->fd2, STDOUT_FILENO) < 0)
-		return (perror("DUP2 "));
-	if (dup2(data->end[0], STDIN_FILENO) < 0)
-		return (perror("DUP2 "));
-	close(data->fd2);
-	close(data->end[0]);
-	close(data->end[1]);
-	parsing_path(cmd, env);
-}
-
-void	ft_exec(t_cmd *cmd, t_env *env, t_data *data, int i)
-{
-	if (i != 0)
+	if (data->fd_prev)
 	{
-		if (dup2(data->prev_end, data->end[0]))
-			return (perror("DUP2 "));
-		close(data->prev_end);
+		if (dup2(data->fd_prev, STDIN_FILENO) == -1)
+			ft_perror_exit("DUP2 ");
+		close(data->fd_prev);
 	}
-	if (i == 0)
-		ft_fcmd(cmd, env, data);
-	else if (!cmd->next)
-		ft_lcmd(cmd, env, data);
-	else
-		ft_icmd(cmd, env, data);
+	if (cmd->in)
+		ft_handle_redirect_in(cmd);
+	if (dup2(data->fd[1], STDOUT_FILENO) == -1)
+		ft_perror_exit("DUP2 ");
+	close(data->fd[1]);
+	command_path = parsing_path(cmd, data->env);
+	if (!command_path)
+		ft_perror_exit("PATH ");
+	if (execve(command_path, cmd->cmd, cmd->envp) == -1)
+		ft_perror_exit("EXECVE ");
 }
 
-// data -> mettre end[2] + fd1 & fd2 + prev_end
 void	pipex(t_cmd *cmd, t_env *env, t_data *data)
 {
-	int	end[2];
-	int	pid1;
-	int	i;
+	int	pid;
 
-	i = -1;
-	while (++i < data->nb_cmd)
+	data->fd_prev = 0;
+	while (cmd->next)
 	{
-		pipe(end);
-		pid1 = fork();
-		if (pid1 < 0)
-			return (perror("FORK "));
-		if (pid1 == 0)
-			ft_exec(cmd, env, data, i);
-		if (cmd->next)
+		pipe(data->fd);
+		pid = fork();
+		if (pid < 0)
+			ft_perror_exit("FORK ");
+		if (pid == 0)
 		{
-			data->prev_end = end[0];
-			cmd = cmd->next;
+			close(data->fd[0]);
+			ft_exec(cmd, data);
 		}
-		close(end[0]);
-		close(end[1]);
+		if (data->fd_prev)
+			close(data->fd_prev);
+		data->fd_prev = data->fd[0];
+		close(data->fd[1]);
+		cmd = cmd->next;
 	}
-	waitpid(pid1, 0, 0);
+	last_cmd(cmd, data);
 }
