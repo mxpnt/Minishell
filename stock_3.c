@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:02:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/04 16:47:17 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/02/08 17:02:28 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	in_x2_open(t_cmd *cmd)
 	if (!cmd->in)
 		return (0);
 	x++;
-	if (!cmd->next)
-		x = 0;
 	fd = open(cmd->in, O_CREAT | O_RDWR, 0644);
 	cmd->red_in = 1;
 	return (fd);
