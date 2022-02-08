@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:46:04 by mapontil          #+#    #+#             */
-/*   Updated: 2022/01/29 16:08:18 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/02/04 16:41:58 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	size2;
 	size_t	i;
 
-	if (!s1)
+	if (!s1 || !s2)
 		return (0);
 	size1 = stlen(s1);
 	size2 = stlen(s2);

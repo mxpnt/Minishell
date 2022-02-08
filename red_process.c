@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:17:55 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/26 14:19:55 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/02/04 16:45:25 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ int	in_x2_red(t_cmd *cmd, char *in, int n)
 	char	*s;
 	int		fd;
 
-	fd = in_x2_open(n);
+	if (!n)
+	{
+		fd = in_x2_open(cmd);
+		if (!fd)
+			return (1);
+	}
 	while (1)
 	{
 		s = readline("> ");
@@ -31,13 +36,7 @@ int	in_x2_red(t_cmd *cmd, char *in, int n)
 		free(s);
 	}
 	if (!n)
-	{
-		cmd->in = ft_strdup("temp_infile");
-		if (!cmd->in)
-			return (1);
-		cmd->red_in = 1;
 		close(fd);
-	}
 	return (0);
 }
 

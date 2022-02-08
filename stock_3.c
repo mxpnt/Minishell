@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:02:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/01/31 17:26:07 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/02/04 16:47:17 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,27 @@ void	write_nl(int fd, char *s)
 	write(fd, "\n", 1);
 }
 
-int	in_x2_open(int n)
+int	in_x2_open(t_cmd *cmd)
 {
-	int	fd;
+	int			fd;
+	static int	x;
+	char		*t;
+	char		*n;
 
-	fd = 0;
-	if (!n)
-		fd = open("temp_infile", O_CREAT | O_RDWR, 0644);
+	t = ft_strdup("temp_infile_");
+	n = ft_itoa(x);
+	cmd->in = ft_strjoin(t, n);
+	if (t)
+		free(t);
+	if (n)
+		free(n);
+	if (!cmd->in)
+		return (0);
+	x++;
+	if (!cmd->next)
+		x = 0;
+	fd = open(cmd->in, O_CREAT | O_RDWR, 0644);
+	cmd->red_in = 1;
 	return (fd);
 }
 

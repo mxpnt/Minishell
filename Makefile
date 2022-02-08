@@ -6,7 +6,7 @@
 #    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/02/04 13:46:31 by mapontil         ###   ########.fr        #
+#    Updated: 2022/02/08 14:28:25 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC =	main.c \
 		stock_1.c \
 		stock_2.c \
 		stock_3.c \
+		stock_4.c \
 		env.c \
 		parsing.c \
 		parsing_error.c \
@@ -29,13 +30,20 @@ SRC =	main.c \
 		red_tab.c \
 		red_process.c \
 		cmd_lst.c \
-		command.c \
 		ft_split.c \
 		pipex.c \
 		cmd_split.c \
 		handle_redirect.c \
 		parsing_path_cmd.c \
-		perror_exit.c
+		perror_exit.c \
+		signal.c \
+		handle_builtins.c \
+		echo_b.c \
+		pwd_b.c \
+		env_b.c \
+		exit_b.c \
+		unset_b.c \
+		ft_itoa.c
 
 GCC = gcc #-Wall -Werror -Wextra
 

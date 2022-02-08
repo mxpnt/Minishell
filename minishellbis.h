@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:17:45 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/04 13:45:44 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/08 14:01:31 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@
 # include <fcntl.h>
 # include <signal.h>
 # include "minishell_struct.h"
-
-// command.c
-void	ft_pwd(t_env *env);
-void	ft_echo(t_cmd *cmd);
-void	ft_env(t_env *env);
-void	ft_unset(t_env *env, t_cmd *cmd);
-void	ft_exit(t_cmd *cmd, t_data *data);
 
 // pipex.c
 void	pipex(t_cmd *cmd, t_env *env, t_data *data);
@@ -43,15 +36,36 @@ void	ft_handle_redirect_in(t_cmd *cmd);
 // execute.c
 void	le_exec(t_cmd *cmd, t_env *env, t_data *data);
 
-// ex_built.c
-int		is_builtin(char **str);
-void	which_builtin(t_cmd *cmd, t_env *env, t_data *data, int n);
+// handle_builtins.c
+int		is_builtin(char *str);
+void	which_builtin(t_cmd *cmd, t_data *data, int n);
+int		handle_builtin(t_cmd *cmd, t_data *data);
+
+// echo_b.c
+void	echo_builtin(t_cmd *cmd);
+
+// pwd_b.c
+void	pwd_builtin(t_env *env);
+
+// env_b.c
+void	env_builtin(t_env *env);
+
+// exit_b.c
+void	exit_builtin(t_data *data);
+
+// export_b.c
+void	export_builtin(t_cmd *cmd);
+
+// unset_b.c
+void	unset_builtin(t_cmd *cmd, t_env **env);
 
 // stock_2.c
 char	*ft_strjoin(char *s1, char *s2);
 
 // stock_4.c
 char	*ft_lower_case(char *str);
+int		last_char_is_bs(char *str);
+char	*clean_bs(char *str);
 
 // ft_split.c
 char	**ft_split(char const *s, char c);

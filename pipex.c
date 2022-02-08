@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:51:42 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/04 13:42:08 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/08 14:59:18 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ void	last_cmd(t_cmd *cmd, t_data *data)
 			ft_handle_redirect_in(cmd);
 		if (cmd->out)
 			ft_handle_redirect_out(cmd);
+		if (handle_builtin(cmd, data))
+		{
+			exit(0);
+		}
 		command_path = parsing_path(cmd, data->env);
-		if (!command_path)
+		if (!cmd->path[0])
 			ft_perror_exit("PATH ");
-		if (execve(command_path, cmd->cmd, cmd->envp) == -1)
+		if (execve(cmd->path, cmd->cmd, cmd->envp) == -1)
 			ft_perror_exit("EXECVE ");
 	}
 	if (data->fd_prev)
@@ -60,10 +64,11 @@ void	ft_exec(t_cmd *cmd, t_data *data)
 	if (dup2(data->fd[1], STDOUT_FILENO) == -1)
 		ft_perror_exit("DUP2 ");
 	close(data->fd[1]);
+	// handle_builtin(cmd, data);
 	command_path = parsing_path(cmd, data->env);
-	if (!command_path)
+	if (!cmd->path[0])
 		ft_perror_exit("PATH ");
-	if (execve(command_path, cmd->cmd, cmd->envp) == -1)
+	if (execve(cmd->path, cmd->cmd, cmd->envp) == -1)
 		ft_perror_exit("EXECVE ");
 }
 
