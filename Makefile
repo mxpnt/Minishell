@@ -3,72 +3,84 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
+#    By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/02/08 14:28:25 by mapontil         ###   ########.fr        #
+#    Updated: 2022/02/16 14:52:57 by lsuau            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAMEX = minishell
+NAME 		=	minishell
 
-INC = minishell.h minishell_struct.h minishellbis.h
+INC 		=	inc/minishell.h inc/minishell_struct.h inc/minishellbis.h
 
-SRC =	main.c \
-		stock_1.c \
-		stock_2.c \
-		stock_3.c \
-		stock_4.c \
-		env.c \
-		parsing.c \
-		parsing_error.c \
-		parsing_error_2.c \
-		pipe_split.c \
-		env_in_line.c \
-		env_in_line_2.c \
-		red_parsing.c \
-		red_tab.c \
-		red_process.c \
-		cmd_lst.c \
-		ft_split.c \
-		pipex.c \
-		cmd_split.c \
-		handle_redirect.c \
-		parsing_path_cmd.c \
-		perror_exit.c \
-		signal.c \
-		handle_builtins.c \
-		echo_b.c \
-		pwd_b.c \
-		env_b.c \
-		exit_b.c \
-		unset_b.c \
-		ft_itoa.c
+SRC			=	main.c \
+				prompt.c
 
-GCC = gcc #-Wall -Werror -Wextra
+BUILT_IN	=	echo_b.c \
+				env_b.c \
+				exit_b.c \
+				export_b.c \
+				pwd_b.c \
+				unset_b.c
 
-OBJ_DIR = obj/
-OBJ = ${addprefix ${OBJ_DIR}, ${SRC:.c=.o}}
+EXEC		=	handle_builtins.c \
+				handle_redirect.c \
+				perror_exit.c \
+				pipex.c \
+				red_parsing.c \
+				red_process.c \
+				red_tab.c
 
-all : ${NAMEX}
+PARSING		=	cmd_lst.c \
+				cmd_split.c \
+				env_in_line.c \
+				env_in_line_2.c \
+				env.c \
+				parsing_error.c \
+				parsing_error_2.c \
+				parsing_path_cmd.c \
+				parsing.c \
+				pipe_split.c \
+				herdoc.c
 
-${OBJ_DIR}%.o : %.c ${INC} Makefile
-	${GCC} -c $< -o $@
+SIGNAL		=	signal.c
 
-${NAMEX}: ${OBJ} ${INC}
-	${GCC} ${OBJ} -o ${NAMEX} -lreadline -I  .brew/opt/readline/include/readline
+UTILS		=	ft_itoa.c \
+				ft_split.c \
+				megajoin.c \
+				stock_1.c \
+				stock_2.c \
+				stock_3.c \
+				stock_4.c \
+				stock_5.c
 
-${OBJ}: | ${OBJ_DIR}
+SRCS		=	${SRC} \
+				${addprefix built_in/, ${BUILT_IN}} \
+				${addprefix exec/, ${EXEC}} \
+				${addprefix parsing/, ${PARSING}} \
+				${addprefix signal/, ${SIGNAL}} \
+				${addprefix utils/, ${UTILS}}
 
-${OBJ_DIR}:
-	mkdir ${OBJ_DIR}
+OBJS		=	${addprefix objs/, ${SRCS:.c=.o}}
 
-clean :
-	rm -rf ${OBJ_DIR}
+CC			=	gcc
+# CFLAGS		=	-Wall -Wextra -Werror
 
-fclean : clean
-	rm -f ${NAMEX}
+all:		${NAME}
+objs/%.o:	src/%.c ${INC}
+			@mkdir -p $(dir $@)
+			${CC} -c $< -o $@
 
-re : fclean all
+${NAME}:	${OBJS} ${INC}
+			${CC} -lreadline -I  .brew/opt/readline/include/readline -o ${NAME} ${OBJS}
 
-.PHONY: all clean fclean re
+clean:
+			rm -rf objs/
+
+fclean:		clean
+			rm -f ${NAME}
+
+re:			fclean all
+
+.PHONY:		all clean fclean re
