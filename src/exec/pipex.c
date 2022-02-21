@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:51:42 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/18 14:30:26 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/21 15:59:22 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	pipex(t_cmd *cmd, t_env *env, t_data *data)
 
 	signal_child_handler(data);
 	data->fd_prev = 0;
-	if (is_builtin(cmd->cmd[0]) == 7 && data->nb_cmd == 1)
-		exit_builtin(data);
+	if (is_builtin(cmd->cmd[0]) && data->nb_cmd == 1)
+		which_builtin(data->cmds, data, is_builtin(cmd->cmd[0]));
 	else
 	{
 		while (cmd->next)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+         #
+#    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/02/16 14:52:57 by lsuau            ###   ########.fr        #
+#    Updated: 2022/02/21 10:05:12 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ INC 		=	inc/minishell.h inc/minishell_struct.h inc/minishellbis.h
 SRC			=	main.c \
 				prompt.c
 
-BUILT_IN	=	echo_b.c \
+BUILT_IN	=	cd_b.c \
+				echo_b.c \
 				env_b.c \
 				exit_b.c \
 				export_b.c \

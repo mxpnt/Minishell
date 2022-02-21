@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:32:35 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/18 11:17:28 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:03:49 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 t_env	*env_init(t_data *data, char **envp);
 void	env_lstclear(t_data *data);
 int		env_lstsize(t_env	*env);
+t_env	*env_lstnew(const char *var);
+void	env_lstadd_back(t_env **alst, t_env *new);
 int		replace_env_line(t_env *env, char **line);
 int		is_spe_env(char c, int dq);
 char	*put_value(char *line, int x, char *value);

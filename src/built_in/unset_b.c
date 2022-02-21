@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:54 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/14 09:04:28 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/21 15:58:39 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,31 @@ void	unset_builtin(t_cmd *cmd, t_env **env)
 	t_env	*curr;
 	t_env	*prev;
 	t_env	*save;
+	int		i;
 
-	curr = *env;
-	save = *env;
-	while (curr)
+	i = 1;
+	while (cmd->cmd[i])
 	{
-		if (stcmp(cmd->cmd[1], curr->name) == 0)
+		curr = *env;
+		save = *env;
+		prev = NULL;
+		while (curr)
 		{
-			prev->next = curr->next;
-			free(curr->name);
-			free(curr->value);
-			free(curr);
-			break ;
+			if (stcmp(cmd->cmd[i], curr->name) == 0)
+			{
+				if (!prev)
+					save = curr->next;
+				else
+					prev->next = curr->next;
+				free(curr->name);
+				free(curr->value);
+				free(curr);
+				break ;
+			}
+			prev = curr;
+			curr = curr->next;
 		}
-		prev = curr;
-		curr = curr->next;
+		(*env) = save;
+		i++;
 	}
-	(*env) = save;
 }

@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:05:51 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/16 15:09:25 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/21 16:20:52 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int	is_builtin(char *str)
 	name = ft_lower_case(str);
 	if (stcmp(name, "echo") == 0)
 		n = 1;
-	// else if (stcmp(name, "cd") == 0)
-	// 	n = 2;
+	else if (stcmp(name, "cd") == 0)
+		n = 2;
 	else if (stcmp(name, "pwd") == 0)
 		n = 3;
-	// else if (stcmp(name, "export") == 0)
-	// 	n = 4;
+	else if (stcmp(name, "export") == 0)
+		n = 4;
 	else if (stcmp(name, "unset") == 0)
 		n = 5;
 	else if (stcmp(name, "env") == 0)
@@ -41,12 +41,12 @@ void	which_builtin(t_cmd *cmd, t_data *data, int n)
 {
 	if (n == 1)
 		echo_builtin(cmd);
-	// else if (n == 2)
-	// 	ft_cd();
+	else if (n == 2)
+		cd_builtin(cmd);
 	else if (n == 3)
 		pwd_builtin(data->env);
-	// else if (n == 4)
-	// 	ft_export();
+	else if (n == 4)
+		export_builtin(data);
 	else if (n == 5)
 		unset_builtin(cmd, &data->env);
 	else if (n == 6)
