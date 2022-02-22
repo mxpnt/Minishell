@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:51:00 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/14 09:05:15 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/22 14:21:06 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ void	env_lstclear(t_data *data)
 	while (l)
 	{
 		t = l->next;
-		free(l->name);
-		free(l->value);
+		if (l->name)
+			free(l->name);
+		if (l->value)
+			free(l->value);
 		free(l);
 		l = t;
 	}

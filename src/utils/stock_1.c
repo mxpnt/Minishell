@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:29:27 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/14 09:16:00 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:25:44 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	stlen(const char *s)
 	int	x;
 
 	x = 0;
+	if (!s)
+		return (0);
 	while (s[x])
 		x++;
 	return (x);
@@ -76,7 +78,7 @@ char	*ft_strdup(const char *s1)
 		r[x] = s1[x];
 		x++;
 	}
-	r[x] = 0;
+	r[x] = '\0';
 	return (r);
 }
 

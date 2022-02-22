@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:27:53 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/21 17:21:12 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:43:37 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_nb_env(t_env *env)
 static t_env	*env_cpy(char **envp)
 {
 	t_env	*env;
-	t_env	t;
+	t_env	*t;
 	int		x;
 
 	env = NULL;
@@ -53,7 +53,6 @@ static void	lst_clear_one_env(t_env **cpy, t_env *save)
 	prev = NULL;
 	while (curr)
 	{
-		dprintf(1, "@@@@@@@@@@@@@@@@@@@@@@@\n%s === %s\n", curr->name, save->name);
 		if (stcmp(curr->name, save->name) == 0)
 		{
 			if (!prev)
@@ -68,33 +67,30 @@ static void	lst_clear_one_env(t_env **cpy, t_env *save)
 		prev = curr;
 		curr = curr->next;
 	}
-	dprintf(1, ">>>>>>>>>>>>>>>>%s=%s\n", root->name, root->value);
-	*cpy = root;
-	dprintf(1, "$$$$$$$$$$$$$$$$%s=%s\n", (*cpy)->name, (*cpy)->value);
+	(*cpy) = root;
 }
 
-static void	ft_which_env(t_env *cpy)
+static void	ft_which_env(t_env **cpy)
 {
 	t_env	*save;
 	t_env	*root;
 
-	root = cpy;
-	save = cpy;
-	dprintf(1, "========================================\n");
-	while (cpy)
+	root = *cpy;
+	save = *cpy;
+	while ((*cpy))
 	{
-		if (stcmp(save->name, cpy->name) > 0)
-			save = cpy;
-		printf("==== %s=\"%s\"\n", cpy->name, cpy->value);
-		cpy = cpy->next;
+		if (stcmp(save->name, (*cpy)->name) > 0)
+			save = *cpy;
+		(*cpy) = (*cpy)->next;
 	}
-	cpy = root;
-	// printf("declare -x %s=\"%s\"\n", save->name, save->value);
-	dprintf(1, "+++++++++++++++++++++++++++\n%s=\"%s\"\n", save->name, save->value);
-	lst_clear_one_env(&cpy, save);
+	(*cpy) = root;
+	if (save->value)
+		printf("declare -x %s=\"%s\"\n", save->name, save->value);
+	else
+		printf("declare -x %s\n", save->name);
+	lst_clear_one_env(cpy, save);
 }
 
-// faire une vraie copie et non une copie de pointeur
 void	export_builtin(t_data *data)
 {
 	t_env	*cpy;
@@ -102,11 +98,17 @@ void	export_builtin(t_data *data)
 	int		nb_env;
 
 	cpy = env_cpy(data->cmds->envp);
-	i = -1;
 	nb_env = ft_nb_env(data->env);
 	if (!data->cmds->cmd[1])
 	{
+		i = -1;
 		while (++i < nb_env)
-			ft_which_env(cpy);
+			ft_which_env(&cpy);
+	}
+	else
+	{
+		i = 0;
+		while (data->cmds->cmd[++i])
+			ft_add_env(data->cmds->cmd[i], data);
 	}
 }

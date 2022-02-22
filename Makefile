@@ -6,7 +6,7 @@
 #    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/02/21 10:05:12 by mapontil         ###   ########.fr        #
+#    Updated: 2022/02/22 14:14:38 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ BUILT_IN	=	cd_b.c \
 				env_b.c \
 				exit_b.c \
 				export_b.c \
+				export2_b.c \
 				pwd_b.c \
 				unset_b.c
 

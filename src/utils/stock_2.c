@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:46:04 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/14 09:05:56 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:56:59 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	ft_strcat(char *dst, const char *src)
 	int	x;
 	int	y;
 
+	if (!src)
+		return ;
 	x = stlen(dst);
 	y = 0;
 	while (src[y])
