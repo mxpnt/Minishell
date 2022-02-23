@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:50:04 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/18 10:55:40 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:43:53 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ void	heredoc_fork(t_env *env, char *name, char *del)
 	char	*s;
 	int		fd;
 
+	signal(SIGINT, &sig_her);
 	if (name)
 		fd = open(name, O_CREAT | O_WRONLY, 0644);
 	while (1)
 	{
 		s = readline("> ");
+		if (!s)
+			break ;
 		if (!stcmp(s, del))
 		{
 			free(s);
@@ -53,7 +56,7 @@ void	heredoc_fork(t_env *env, char *name, char *del)
 	}
 	if (name)
 		close(fd);
-	exit (0);
+	exit(0);
 }
 
 int	heredoc_red(t_data *data, t_cmd *cmd, char *in, int n)
@@ -73,7 +76,10 @@ int	heredoc_red(t_data *data, t_cmd *cmd, char *in, int n)
 		return (mess_error(0, 0, 3));
 	if (pid == 0)
 		heredoc_fork(data->env, cmd->in, in);
-	while (waitpid(pid, &status, 0) != -1)
-		;
+	waitpid(pid, &status, 0);
+	// g_excode = WEXITSTATUS(status);
+	// printf("%d\n", g_excode);
+	// if (WIFSIGNALED(status))
+	// 	exit(0);
 	return (0);
 }

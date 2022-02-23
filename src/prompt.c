@@ -6,11 +6,13 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 10:23:17 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/16 09:07:29 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:58:22 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	g_excode;
 
 char	*set_prompt(t_data *data)
 {
@@ -18,7 +20,10 @@ char	*set_prompt(t_data *data)
 	char		buf[PATH_MAX];
 	t_prompt	elem;
 
-	elem.status = "🏵  ";
+	if (g_excode)
+		elem.status = "💩 ";
+	else
+		elem.status = "🏵  ";
 	getcwd(buf, PATH_MAX);
 	elem.curr_dir = ft_strrchr(buf, '/') + 1;
 	elem.user = ft_userchr(data);

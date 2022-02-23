@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:51:42 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/21 15:59:22 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:18:59 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	g_excode;
 
 void	last_cmd(t_cmd *cmd, t_data *data)
 {
-	char	*command_path;
 	int		pid;
 	int		status;
 
@@ -35,9 +34,10 @@ void	last_cmd(t_cmd *cmd, t_data *data)
 			ft_handle_redirect_in(cmd);
 		if (cmd->out)
 			ft_handle_redirect_out(cmd);
+		if (!cmd->cmd[0])
+			exit(0);
 		if (handle_builtin(cmd, data))
 			exit(0);
-		command_path = parsing_path(cmd, data->env);
 		if (!cmd->path[0])
 			ft_command_not_found(cmd->cmd[0]);
 		if (execve(cmd->path, cmd->cmd, cmd->envp) == -1)
@@ -45,20 +45,30 @@ void	last_cmd(t_cmd *cmd, t_data *data)
 	}
 	if (data->fd_prev)
 		close(data->fd_prev);
-	// waitpid(pid, &status, 0);
-	// if (WIFEXITED(status))
-	// {
-	// 	g_excode = WEXITSTATUS(status);
-	// 	printf("\n==%d==\n", g_excode);
-	// }
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == 2)
+			g_excode = 130;
+		else if (WTERMSIG(status) == 3)
+		{
+			write(1,"Quit: 3", 8);
+			g_excode = 131;
+		}
+		else
+			g_excode = WTERMSIG(status);
+		write(1, "\n", 1);
+	}
+	else if (WIFEXITED(status))
+	{
+		g_excode = WEXITSTATUS(status);
+	}
 	while (waitpid(-1, &pid, 0) != -1)
-		; // waitpid last cmd to update "$?" and handle signal
+		;
 }
 
 void	ft_exec(t_cmd *cmd, t_data *data)
 {
-	char	*command_path;
-
 	if (data->fd_prev)
 	{
 		if (dup2(data->fd_prev, STDIN_FILENO) == -1)
@@ -72,7 +82,6 @@ void	ft_exec(t_cmd *cmd, t_data *data)
 	close(data->fd[1]);
 	if (handle_builtin(cmd, data))
 		exit(0);
-	command_path = parsing_path(cmd, data->env);
 	if (!cmd->path[0])
 		ft_command_not_found(cmd->cmd[0]);
 	if (execve(cmd->path, cmd->cmd, cmd->envp) == -1)

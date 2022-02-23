@@ -6,40 +6,43 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:27:53 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/22 16:43:37 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:04:59 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static int	ft_nb_env(t_env *env)
-{
-	int	i;
+int	g_excode;
 
-	i = 0;
-	while (env)
-	{
-		i++;
-		env = env->next;
-	}
-	return (i);
+static t_env	*env_cpy_new(t_env env)
+{
+	t_env	*new;
+
+	new = malloc(sizeof(t_env));
+	if (!new)
+		return (NULL);
+	new->name = ft_strdup(env.name);
+	if (env.value)
+		new->value = ft_strdup(env.value);
+	new->next = NULL;
+	return (new);
 }
 
-static t_env	*env_cpy(char **envp)
+static t_env	*env_cpy(t_env *env)
 {
-	t_env	*env;
-	t_env	*t;
-	int		x;
+	t_env	*cpy;
+	t_env	*node;
+	int		i;
 
-	env = NULL;
-	x = 0;
-	while (envp[x])
+	i = 0;
+	cpy = NULL;
+	while (env)
 	{
-		t = env_lstnew(envp[x]);
-		env_lstadd_back(&env, t);
-		x++;
+		node = env_cpy_new((*env));
+		env_lstadd_back(&cpy, node);
+		env = env->next;
 	}
-	return (env);
+	return (cpy);
 }
 
 static void	lst_clear_one_env(t_env **cpy, t_env *save)
@@ -60,7 +63,8 @@ static void	lst_clear_one_env(t_env **cpy, t_env *save)
 			else
 				prev->next = curr->next;
 			free(curr->name);
-			free(curr->value);
+			if (curr->value)
+				free(curr->value);
 			free(curr);
 			break ;
 		}
@@ -97,7 +101,7 @@ void	export_builtin(t_data *data)
 	int		i;
 	int		nb_env;
 
-	cpy = env_cpy(data->cmds->envp);
+	cpy = env_cpy(data->env);
 	nb_env = ft_nb_env(data->env);
 	if (!data->cmds->cmd[1])
 	{
@@ -111,4 +115,5 @@ void	export_builtin(t_data *data)
 		while (data->cmds->cmd[++i])
 			ft_add_env(data->cmds->cmd[i], data);
 	}
+	g_excode = 0;
 }

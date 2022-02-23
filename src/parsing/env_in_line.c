@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_in_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:37:47 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/16 19:50:20 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:26:44 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*search_env(t_env *env, char *line)
 	}
 	while (env && x)
 	{
-		if (!ft_strncmp(line, env->name, x))
+		if (!ft_strncmp(line, env->name, x) && stlen(env->name) == x)
 			return (env->value);
 		env = env->next;
 	}

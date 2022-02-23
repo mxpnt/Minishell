@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:18:24 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/21 14:16:17 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:17:59 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,12 @@ void	exit_builtin(t_data *data)
 		}
 		else if (is_valid_exit(data) == 1)
 		{
-			// 255
-			printf("minishell: exit: %s: numeric argument required\n", data->cmds->cmd[1]);
-			exit(255); // remplacer par variable globale + data->run = 0 ?
+			printf("minishell: exit: %s: numeric argument required\n", \
+			data->cmds->cmd[1]);
+			exit(255);
 		}
 		else if (is_valid_exit(data) == 2)
 		{
-			// 1
 			printf("minishell: exit: too many arguments\n");
 		}
 	}

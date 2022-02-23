@@ -6,11 +6,13 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:17:58 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/14 08:48:25 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:14:49 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int	g_excode;
 
 static int	check_option(char *str)
 {
@@ -67,6 +69,7 @@ void	echo_builtin(t_cmd *cmd)
 		write(1, str, stlen(str));
 		free(str);
 	}
-	if (check_option(cmd->cmd[1]))
+	if (cmd->cmd[1] && check_option(cmd->cmd[1]))
 		write(1, "\n", 1);
+	g_excode = 0;
 }

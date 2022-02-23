@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:24:33 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/22 16:27:43 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:19:33 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	data_init(t_data *data, char **envp)
 	data->cmds = 0;
 	data->nb_cmd = 0;
 	data->run = 1;
-	// data->error = 0;
 	if (tcgetattr(0, &data->term_base) == -1)
 	{
 		perror("tcgetattr");
@@ -44,16 +43,10 @@ int	main(int argc, char **argv, char **envp)
 			exit(0); // fonction exit_ctrld
 		if (line && line[0])
 			add_history(line);
-		// dprintf(1, "ok");
 		le_parsing(&data, line);
 		if (data.nb_cmd)
 			pipex(data.cmds, data.env, &data);
 		cmd_lstclear(&data);
-		// while (data.env)
-		// {
-		// 	dprintf(1, "%s=\n", data.env->name);
-		// 	data.env = data.env->next;
-		// }
 		free(line);
 		free(test);
 	}

@@ -6,11 +6,13 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:13:26 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/22 14:35:33 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:08:37 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int	g_excode;
 
 void	env_builtin(t_env *env)
 {
@@ -18,12 +20,9 @@ void	env_builtin(t_env *env)
 
 	while (env)
 	{
-		if (env->name)
-			str = ft_strjoin(env->name, "=");
 		if (env->value)
-			str = ft_strjoin(str, env->value);
-		write(1, str, stlen(str));
-		write(1, "\n", 1);
+			printf("%s=%s\n", env->name, env->value);
 		env = env->next;
 	}
+	g_excode = 0;
 }

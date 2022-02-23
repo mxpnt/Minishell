@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:18:15 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/18 11:20:49 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/02/23 09:20:20 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_line_split(char *line)
 {
 	int	x;
 	int	y;
-	
+
 	x = 0;
 	y = 0;
 	while (line[x])

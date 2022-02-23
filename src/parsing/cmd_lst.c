@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:30:25 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/22 16:49:00 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 08:26:31 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,11 @@ char	**env_lst_to_tab(t_env *env)
 			return (free_tab(envp));
 		envp[x][0] = 0;
 		ft_strcat(envp[x], env->name);
-		ft_strcat(envp[x], "=");
-		ft_strcat(envp[x], env->value);
+		if (env->value)
+		{
+			ft_strcat(envp[x], "=");
+			ft_strcat(envp[x], env->value);
+		}
 		x++;
 		env = env->next;
 	}

@@ -6,11 +6,13 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:03:19 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/14 09:04:25 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:08:27 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int	g_excode;
 
 void	pwd_builtin(t_env *env)
 {
@@ -24,4 +26,5 @@ void	pwd_builtin(t_env *env)
 		}
 		env = env->next;
 	}
+	g_excode = 0;
 }

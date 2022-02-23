@@ -6,25 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:46:31 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/22 16:25:36 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 09:19:44 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-static int	check_equal(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '=')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 static t_env	*env_lstnew_no_value(char *str)
 {
@@ -56,28 +42,55 @@ static t_env	*env_lstnew_value(char const *str)
 	return (new);
 }
 
+static int	check_env_dup(char *str, t_env *env)
+{
+	char	*name;
+	int		i;
+
+	i = 0;
+	while (str[i] != '=')
+		i++;
+	name = ft_substr(str, 0, i);
+	while (env)
+	{
+		if (stcmp(env->name, name) == 0)
+			return (1);
+		env = env->next;
+	}
+	return (0);
+}
+
+static int	check_exp_dup(char *str, t_env *env)
+{
+	while (env)
+	{
+		if (stcmp(env->name, str) == 0)
+			return (1);
+		env = env->next;
+	}
+	return (0);
+}
+
 void	ft_add_env(char *str, t_data *data)
 {
 	t_env	*new;
 
 	if (check_equal(str))
 	{
-		new = env_lstnew_value(str);
-		if (!new)
+		if (check_env_dup(str, data->env) == 0)
 		{
-			env_lstclear(data);
-			return ;
+			new = env_lstnew_value(str);
+			env_lstadd_back(&data->env, new);
 		}
-		env_lstadd_back(&data->env, new);
+		else
+			change_value_env(str, data->env);
 	}
 	else
 	{
-		new = env_lstnew_no_value(str);
-		if (!new)
+		if (check_exp_dup(str, data->env) == 0)
 		{
-			env_lstclear(data);
-			return ;
+			new = env_lstnew_no_value(str);
+			env_lstadd_back(&data->env, new);
 		}
-		env_lstadd_back(&data->env, new);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:17:45 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/22 14:15:30 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:44:14 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ char			*ft_userchr(t_data *data);
 // stock_5.c
 int				is_number(char *str);
 long long int	atolli(char *str);
+int				ft_nb_env(t_env *env);
+void			change_value_env(char *str, t_env *env);
+int				check_equal(char *str);
 
 // ft_split.c
 char			**ft_split(char const *s, char c);
@@ -107,7 +110,7 @@ void			signal_c(int signum);
 void			signal_handler(void);
 void			signal_child(int signum);
 void			signal_child_handler(t_data *data);
-void			signal_sugar_daddy_handler(void);
+void			sig_her(int signum);
 
 // prompt.c
 char			*set_prompt(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:54:31 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/21 11:15:21 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:19:45 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	signal_handler(void)
 void	signal_child(int signum)
 {
 	(void)signum;
-	write(1, "\n", 1);
 }
 
 void	signal_child_handler(t_data *data)
@@ -45,8 +44,9 @@ void	signal_child_handler(t_data *data)
 	signal(SIGINT, &signal_child);
 }
 
-void	signal_sugar_daddy_handler(void)
+void	sig_her(int signum)
 {
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, SIG_IGN);
+	(void)signum;
+	write(1, "\n", 1);
+	exit(1);
 }
