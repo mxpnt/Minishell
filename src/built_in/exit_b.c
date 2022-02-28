@@ -6,11 +6,13 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:18:24 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/23 17:17:59 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/28 12:28:21 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int	g_excode;
 
 static int	nb_arg_exit(t_cmd *cmd)
 {
@@ -56,16 +58,20 @@ void	exit_builtin(t_data *data)
 		if (!data->cmds->cmd[1] || is_valid_exit(data) == 0)
 		{
 			data->run = 0;
+			g_excode = 0;
 		}
 		else if (is_valid_exit(data) == 1)
 		{
 			printf("minishell: exit: %s: numeric argument required\n", \
 			data->cmds->cmd[1]);
+			cmd_lstclear(data);
+			env_lstclear(data);
 			exit(255);
 		}
 		else if (is_valid_exit(data) == 2)
 		{
 			printf("minishell: exit: too many arguments\n");
+			g_excode = 1;
 		}
 	}
 }

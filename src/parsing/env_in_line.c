@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   env_in_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:37:47 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/23 16:26:44 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:35:38 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	check_env_char(char c)
+int	g_excode;
+
+int	check_env_char(char *line, int y)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1);
-	if ((c >= '0' && c <= '9'))
-		return (1);
-	return (0);
+	while ((line[y] >= 'a' && line[y] <= 'z')
+		|| (line[y] >= 'A' && line[y] <= 'Z')
+		|| (line[y] >= '0' && line[y] <= '9'))
+		y++;
+	return (y);
 }
 
 char	*search_env(t_env *env, char *line)
@@ -27,12 +29,8 @@ char	*search_env(t_env *env, char *line)
 
 	x = 0;
 	if (line[x] == '?')
-		x++;
-	else
-	{
-		while (check_env_char(line[x]))
-			x++;
-	}
+		return (ft_itoa(g_excode));
+	x = check_env_char(line, x);
 	while (env && x)
 	{
 		if (!ft_strncmp(line, env->name, x) && stlen(env->name) == x)
@@ -55,12 +53,16 @@ char	*insert_value(char *line, int *x, int dq, char *value)
 		ft_strcpy(line + *x, line + y + 1);
 	else
 	{
-		while (check_env_char(line[y]))
+		if (line[y] == '?')
 			y++;
+		else
+			y = check_env_char(line, y);
 		ft_strcpy(line + *x, line + y);
 		if (value)
 		{
 			line = put_value(line, *x, value);
+			if (line[*x + 1] == '?')
+				free(value);
 			*x += stlen(value);
 		}
 	}

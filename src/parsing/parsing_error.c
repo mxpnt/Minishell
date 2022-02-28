@@ -6,11 +6,13 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 18:30:04 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/16 18:25:55 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/02/25 20:21:07 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int	g_excode;
 
 int	mess_error(char c, const char *s, int n)
 {
@@ -22,9 +24,16 @@ int	mess_error(char c, const char *s, int n)
 		else
 			write(2, s, stlen(s));
 		write(2, "'\n", 2);
+		g_excode = 258;
 	}
 	else if (n == 1)
-		write(2, "minimush: malloc error\n", 23);
+	{
+		if (g_excode != 1)
+		{
+			g_excode = 1;
+			write(2, "minimush: malloc error\n", 23);
+		}
+	}
 	else if (n == 3)
 	{
 		write(1, "minishell: ", 11);

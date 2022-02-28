@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:24:33 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/23 17:19:33 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/28 12:29:29 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,4 @@ int	main(int argc, char **argv, char **envp)
 		free(test);
 	}
 	env_lstclear(&data);
-}
-
-void	print_tab(char **tab)
-{
-	int	x;
-
-	if (!tab)
-		return ;
-	x = 0;
-	while (tab[x])
-	{
-		printf("%s\n", tab[x]);
-		x++;
-	}
 }

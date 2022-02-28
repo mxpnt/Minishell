@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:17:45 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/23 16:44:14 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/28 12:36:41 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void			pipex(t_cmd *cmd, t_env *env, t_data *data);
 void			ft_exec(t_cmd *cmd, t_data *data);
 void			last_cmd(t_cmd *cmd, t_data *data);
 void			one_cmd(t_cmd *cmd, t_data *data);
+
+// excode.c
+void			wait_excode(int pid, int status);
 
 // parsing_path_cmd.c
 char			**get_path_env_splited(t_env *env, t_cmd *cmd);

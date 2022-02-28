@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:50:04 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/23 16:43:53 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:32:07 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int	g_excode;
 
 void	in_x2_name(t_cmd *cmd)
 {
@@ -43,13 +45,13 @@ void	heredoc_fork(t_env *env, char *name, char *del)
 		s = readline("> ");
 		if (!s)
 			break ;
+		if (replace_env_line(env, &s))
+			exit(1);
 		if (!stcmp(s, del))
 		{
 			free(s);
 			break ;
 		}
-		if (replace_env_line(env, &s))
-			exit(1);
 		if (name)
 			write_nl(fd, s);
 		free(s);
@@ -77,9 +79,10 @@ int	heredoc_red(t_data *data, t_cmd *cmd, char *in, int n)
 	if (pid == 0)
 		heredoc_fork(data->env, cmd->in, in);
 	waitpid(pid, &status, 0);
-	// g_excode = WEXITSTATUS(status);
-	// printf("%d\n", g_excode);
-	// if (WIFSIGNALED(status))
-	// 	exit(0);
+	if (status)
+	{
+		g_excode = 1;
+		return (1);
+	}
 	return (0);
 }

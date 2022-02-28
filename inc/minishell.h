@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:32:35 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/21 17:03:49 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/28 12:29:41 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,5 @@ void	ft_strcpy(char *dst, const char *src);
 void	ft_strcat(char *dst, const char *src);
 void	write_nl(int fd, char *s);
 int		longest_in_tab(char **tab);
-//temp
-void	print_tab(char **tab);
+
 #endif

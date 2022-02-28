@@ -6,7 +6,7 @@
 #    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/02/22 14:14:38 by mapontil         ###   ########.fr        #
+#    Updated: 2022/02/28 12:37:45 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ BUILT_IN	=	cd_b.c \
 				pwd_b.c \
 				unset_b.c
 
-EXEC		=	handle_builtins.c \
+EXEC		=	excode.c \
+				handle_builtins.c \
 				handle_redirect.c \
 				perror_exit.c \
 				pipex.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:30:25 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/23 08:26:31 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/02/25 20:14:37 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	cmd_lstclear(t_data *data)
 			free_tab(l->cmd);
 		if (l->path)
 			free(l->path);
+		if (l->red_in == 1 && !access(l->in, F_OK))
+			unlink(l->in);
 		if (l->in)
 			free(l->in);
 		if (l->out)
