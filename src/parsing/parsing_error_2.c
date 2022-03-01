@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:01:43 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/16 19:23:00 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/01 15:14:49 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
-int	red_error(t_data *data, char c)
+int	red_error(char c)
 {
 	char	s[2];
 
@@ -23,7 +23,7 @@ int	red_error(t_data *data, char c)
 	return (mess_error(c, 0, 0));
 }
 
-int	wrong_redcara(t_data *data, char *line)
+int	wrong_redcara(char *line)
 {
 	int		x;
 	char	red;
@@ -37,6 +37,6 @@ int	wrong_redcara(t_data *data, char *line)
 		x++;
 	c = line[x];
 	if (c == '|' || c == 0 || c == '>' || c == '<')
-		return (red_error(data, c));
+		return (red_error(c));
 	return (0);
 }

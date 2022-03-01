@@ -6,17 +6,45 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 08:58:18 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/23 17:29:26 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:02:16 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 int	g_excode;
 
-void	cd_builtin(t_cmd *cmd)
+static char	*home_dir(t_env *env)
 {
-	if (chdir(cmd->cmd[1]) == -1)
+	if (!env)
+		return (NULL);
+	while (env)
+	{
+		if (stcmp(env->name, "HOME") == 0)
+			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
+}
+
+void	cd_builtin(t_cmd *cmd, t_env *env)
+{
+	char	*home;
+
+	if (!cmd->cmd[1])
+	{
+		home = ft_strdup(home_dir(env));
+		if (chdir(home) == -1)
+		{
+			perror("cd");
+			g_excode = 1;
+		}
+		else
+			g_excode = 0;
+		if (home)
+			free(home);
+	}
+	else if (chdir(cmd->cmd[1]) == -1)
 	{
 		perror("cd");
 		g_excode = 1;

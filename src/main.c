@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:24:33 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/28 12:29:29 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:12:46 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "inc/minishell.h"
 
 void	data_init(t_data *data, char **envp)
 {
@@ -25,6 +25,7 @@ void	data_init(t_data *data, char **envp)
 	}
 }
 
+// fonction exit_ctrld if(!line)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
@@ -40,12 +41,12 @@ int	main(int argc, char **argv, char **envp)
 		test = set_prompt(&data);
 		line = readline(test);
 		if (!line)
-			exit(0); // fonction exit_ctrld
+			exit(0);
 		if (line && line[0])
 			add_history(line);
 		le_parsing(&data, line);
 		if (data.nb_cmd)
-			pipex(data.cmds, data.env, &data);
+			pipex(data.cmds, &data);
 		cmd_lstclear(&data);
 		free(line);
 		free(test);

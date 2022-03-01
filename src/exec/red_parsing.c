@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:46:26 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/18 10:53:17 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:13:27 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 int	process_in(t_cmd *cmd, char **in, t_data *data)
 {
@@ -51,7 +51,6 @@ void	empty_redout(char *out)
 int	process_out(t_cmd *cmd, char **out)
 {
 	int	x;
-	int	r;
 	int	last;
 
 	last = tablen(out) - 1;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:30:25 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/25 20:14:37 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/01 15:03:24 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 void	cmd_lstadd_back(t_cmd **alst, t_cmd *new)
 {

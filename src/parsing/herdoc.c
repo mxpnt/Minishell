@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:50:04 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/28 15:32:07 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/01 15:03:37 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 int	g_excode;
 
@@ -44,7 +44,7 @@ void	heredoc_fork(t_env *env, char *name, char *del)
 	{
 		s = readline("> ");
 		if (!s)
-			break ;
+			exit(2);
 		if (replace_env_line(env, &s))
 			exit(1);
 		if (!stcmp(s, del))
@@ -66,7 +66,7 @@ int	heredoc_red(t_data *data, t_cmd *cmd, char *in, int n)
 	int	pid;
 	int	status;
 
-	signal_child_handler(data);
+	signal(SIGINT, &signal_herdoc);
 	if (!n)
 	{
 		in_x2_name(cmd);
@@ -75,13 +75,13 @@ int	heredoc_red(t_data *data, t_cmd *cmd, char *in, int n)
 	}
 	pid = fork();
 	if (pid < 0)
-		return (mess_error(0, 0, 3));
+		return (1);
 	if (pid == 0)
 		heredoc_fork(data->env, cmd->in, in);
 	waitpid(pid, &status, 0);
 	if (status)
 	{
-		g_excode = 1;
+		g_excode = status;
 		return (1);
 	}
 	return (0);

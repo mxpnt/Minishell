@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:18:24 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/28 12:28:21 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:12:13 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 int	g_excode;
 
@@ -18,6 +18,7 @@ static int	nb_arg_exit(t_cmd *cmd)
 {
 	int	i;
 
+	i = 0;
 	while (cmd->cmd[i])
 		i++;
 	if (i > 2)

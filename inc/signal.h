@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_b.c                                            :+:      :+:    :+:   */
+/*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 13:13:26 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/01 15:12:00 by mapontil         ###   ########.fr       */
+/*   Created: 2022/03/01 14:51:41 by mapontil          #+#    #+#             */
+/*   Updated: 2022/03/01 14:52:54 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/minishell.h"
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-int	g_excode;
+# include "minishell_struct.h"
 
-void	env_builtin(t_env *env)
-{
-	while (env)
-	{
-		if (env->value)
-			printf("%s=%s\n", env->name, env->value);
-		env = env->next;
-	}
-	g_excode = 0;
-}
+// signal.c
+void	signal_c(int signum);
+void	signal_handler(void);
+void	signal_child(int signum);
+void	signal_child_handler(t_data *data);
+
+// signal2.c
+void	signal_herdoc(int signum);
+void	sig_her(int signum);
+
+#endif

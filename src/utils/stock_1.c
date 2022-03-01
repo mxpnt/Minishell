@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:29:27 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/22 16:25:44 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:55:42 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	stlen(const char *s)
 	return (x);
 }
 
-char	*ft_substr(char const	*s, int start, int len)
+char	*ft_substr(char const *s, int start, int len)
 {
 	int		x;
 	int		y;
@@ -69,6 +69,8 @@ char	*ft_strdup(const char *s1)
 	int		x;
 	char	*r;
 
+	if (!s1)
+		return (NULL);
 	x = 0;
 	r = malloc(stlen(s1) + 1);
 	if (!r)

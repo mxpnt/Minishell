@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:18:15 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/23 09:20:20 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:03:49 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 int	check_line_split(char *line)
 {

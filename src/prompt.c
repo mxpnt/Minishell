@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 10:23:17 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/23 16:58:22 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:04:07 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "inc/minishell.h"
 
 int	g_excode;
 

@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:54:31 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/28 15:19:12 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:03:56 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 void	signal_c(int signum)
 {
@@ -42,11 +42,4 @@ void	signal_child_handler(t_data *data)
 	tcsetattr(0, TCSANOW, &data->term_base);
 	signal(SIGQUIT, &signal_child);
 	signal(SIGINT, &signal_child);
-}
-
-void	sig_her(int signum)
-{
-	(void)signum;
-	write(1, "\n", 1);
-	exit(1);
 }

@@ -6,17 +6,32 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:51:42 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/28 15:34:53 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:13:01 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
+
+static void	last_cmd_exec(t_cmd *cmd, t_data *data)
+{
+	if (cmd->in)
+		ft_handle_redirect_in(cmd);
+	if (cmd->out)
+		ft_handle_redirect_out(cmd);
+	if (handle_builtin(cmd, data))
+		exit(0);
+	if (!cmd->path[0])
+		ft_command_not_found(cmd->cmd[0]);
+	if (execve(cmd->path, cmd->cmd, cmd->envp) == -1)
+		ft_perror_exit(cmd->cmd[0], 0);
+}
 
 void	last_cmd(t_cmd *cmd, t_data *data)
 {
 	int		pid;
 	int		status;
 
+	status = 0;
 	pid = fork();
 	if (pid < 0)
 		ft_perror_exit("fork", 0);
@@ -28,16 +43,7 @@ void	last_cmd(t_cmd *cmd, t_data *data)
 				ft_perror_exit("dup2", 0);
 			close(data->fd_prev);
 		}
-		if (cmd->in)
-			ft_handle_redirect_in(cmd);
-		if (cmd->out)
-			ft_handle_redirect_out(cmd);
-		if (handle_builtin(cmd, data))
-			exit(0);
-		if (!cmd->path[0])
-			ft_command_not_found(cmd->cmd[0]);
-		if (execve(cmd->path, cmd->cmd, cmd->envp) == -1)
-			ft_perror_exit(cmd->cmd[0], 0);
+		last_cmd_exec(cmd, data);
 	}
 	if (data->fd_prev)
 		close(data->fd_prev);
@@ -78,7 +84,7 @@ static void	launch_exec(t_cmd *cmd, t_data *data)
 	ft_exec(cmd, data);
 }
 
-void	pipex(t_cmd *cmd, t_env *env, t_data *data)
+void	pipex(t_cmd *cmd, t_data *data)
 {
 	int	pid;
 

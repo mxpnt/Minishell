@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:51:00 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/23 08:36:53 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:03:34 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 t_env	*env_lstnew(const char *var)
 {

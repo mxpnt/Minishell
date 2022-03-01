@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:27:53 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/23 17:04:59 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:02:37 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 int	g_excode;
 
@@ -95,7 +95,7 @@ static void	ft_which_env(t_env **cpy)
 	lst_clear_one_env(cpy, save);
 }
 
-void	export_builtin(t_data *data)
+void	export_builtin(t_data *data, t_cmd *cmd)
 {
 	t_env	*cpy;
 	int		i;
@@ -103,7 +103,7 @@ void	export_builtin(t_data *data)
 
 	cpy = env_cpy(data->env);
 	nb_env = ft_nb_env(data->env);
-	if (!data->cmds->cmd[1])
+	if (!cmd->cmd[1])
 	{
 		i = -1;
 		while (++i < nb_env)
@@ -112,8 +112,8 @@ void	export_builtin(t_data *data)
 	else
 	{
 		i = 0;
-		while (data->cmds->cmd[++i])
-			ft_add_env(data->cmds->cmd[i], data);
+		while (cmd->cmd[++i])
+			ft_add_env(cmd->cmd[i], data);
 	}
 	g_excode = 0;
 }

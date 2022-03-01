@@ -6,13 +6,18 @@
 #    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/02/28 12:37:45 by mapontil         ###   ########.fr        #
+#    Updated: 2022/03/01 15:11:33 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		=	minishell
 
-INC 		=	inc/minishell.h inc/minishell_struct.h inc/minishellbis.h
+INC 		=	inc/minishell.h inc/minishell_struct.h \
+				inc/built_in.h \
+				inc/exec.h \
+				inc/parsing.h \
+				inc/signal.h \
+				inc/utils.h
 
 SRC			=	main.c \
 				prompt.c
@@ -42,12 +47,12 @@ PARSING		=	cmd_lst.c \
 				env.c \
 				parsing_error.c \
 				parsing_error_2.c \
-				parsing_path_cmd.c \
 				parsing.c \
 				pipe_split.c \
 				herdoc.c
 
-SIGNAL		=	signal.c
+SIGNAL		=	signal.c \
+				signal2.c
 
 UTILS		=	ft_itoa.c \
 				ft_split.c \
@@ -68,15 +73,15 @@ SRCS		=	${SRC} \
 OBJS		=	${addprefix objs/, ${SRCS:.c=.o}}
 
 CC			=	gcc
-# CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror
 
 all:		${NAME}
-objs/%.o:	src/%.c ${INC}
+objs/%.o:	src/%.c ${INC} Makefile
 			@mkdir -p $(dir $@)
-			${CC} -c $< -o $@
+			${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS} ${INC}
-			${CC} -lreadline -I  .brew/opt/readline/include/readline -o ${NAME} ${OBJS}
+			${CC} ${CFLAGS} -lreadline -I  .brew/opt/readline/include/readline -o ${NAME} ${OBJS}
 
 clean:
 			rm -rf objs/

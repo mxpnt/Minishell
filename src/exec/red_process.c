@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   red_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:17:55 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/16 15:36:29 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/01 15:03:17 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 int	in_x1_red(t_cmd *cmd, char *in, int n)
 {

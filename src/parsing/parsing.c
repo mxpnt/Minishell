@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:02:28 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/22 15:51:33 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:15:52 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 void	find_path(char **paths, char *cmd, char *s)
 {
@@ -25,6 +25,11 @@ void	find_path(char **paths, char *cmd, char *s)
 		if (!access(s, F_OK))
 			return ;
 		x++;
+	}
+	if (stlen(cmd) > 1 && !ft_strncmp(cmd, "./", 2))
+	{
+		ft_strcpy(s, cmd);
+		return ;
 	}
 	ft_strcpy(s, "");
 }
@@ -83,7 +88,7 @@ int	le_parsing(t_data *data, char *line)
 	char	**line_split;
 
 	data->nb_cmd = 0;
-	if (!line || check_quote_n_pipe(data, line) || check_red(data, line))
+	if (!line || check_quote_n_pipe(line) || check_red(line))
 		return (1);
 	line_split = pipe_split(line);
 	if (!line_split)

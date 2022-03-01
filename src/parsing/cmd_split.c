@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 15:29:44 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/18 11:10:10 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:03:26 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 void	remove_cmd_quotes(char **cmd)
 {

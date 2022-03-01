@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 13:52:53 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/14 09:05:06 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:03:29 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 int	is_spe_env(char c, int dq)
 {
