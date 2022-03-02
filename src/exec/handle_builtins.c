@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:05:51 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/01 15:02:55 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:32:10 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	which_builtin(t_cmd *cmd, t_data *data, int n)
 	else if (n == 2)
 		cd_builtin(cmd, data->env);
 	else if (n == 3)
-		pwd_builtin(data->env);
+		pwd_builtin();
 	else if (n == 4)
 		export_builtin(data, cmd);
 	else if (n == 5)

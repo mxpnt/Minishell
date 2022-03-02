@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:34:52 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 11:52:52 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:11:58 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ void	export_builtin(t_data *data, t_cmd *cmd);
 // export2_b.c
 void	ft_add_env(char *str, t_data *data);
 
+// export3_b.c
+int		valid_identifier(char *str, int mod);
+
 // pwd_b.c
-void	pwd_builtin(t_env *env);
+void	pwd_builtin(void);
 
 // unset_b.c
 void	unset_builtin(t_cmd *cmd, t_env **env);

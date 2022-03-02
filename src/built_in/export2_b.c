@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:46:31 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 16:45:09 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:12:10 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,25 @@ void	ft_add_env(char *str, t_data *data)
 {
 	t_env	*new;
 
-	if (check_equal(str))
+	if (valid_identifier(str, 0) == 0)
 	{
-		if (check_env_dup(str, data->env) == 0)
+		if (check_equal(str))
 		{
-			new = env_lstnew_value(str);
-			env_lstadd_back(&data->env, new);
+			if (check_env_dup(str, data->env) == 0)
+			{
+				new = env_lstnew_value(str);
+				env_lstadd_back(&data->env, new);
+			}
+			else
+				change_value_env(str, data->env);
 		}
 		else
-			change_value_env(str, data->env);
-	}
-	else
-	{
-		if (check_exp_dup(str, data->env) == 0)
 		{
-			new = env_lstnew_no_value(str);
-			env_lstadd_back(&data->env, new);
+			if (check_exp_dup(str, data->env) == 0)
+			{
+				new = env_lstnew_no_value(str);
+				env_lstadd_back(&data->env, new);
+			}
 		}
 	}
 }

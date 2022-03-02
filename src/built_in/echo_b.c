@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:17:58 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/01 15:11:47 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:20:38 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	print_echo(t_cmd *cmd)
 	int	i;
 
 	i = 1;
-	if (check_option(cmd->cmd[i]) == 0 && cmd->cmd[i])
+	while (check_option(cmd->cmd[i]) == 0 && cmd->cmd[i])
 			i++;
 	while (cmd->cmd[i])
 	{

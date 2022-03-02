@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:27:53 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 16:45:00 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:14:28 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static void	lst_clear_one_env(t_env **cpy, t_env *save)
 	(*cpy) = root;
 }
 
-// ici (peutetre)
 static void	ft_which_env(t_env **cpy)
 {
 	t_env	*save;
@@ -118,5 +117,10 @@ void	export_builtin(t_data *data, t_cmd *cmd)
 		while (cmd->cmd[++i])
 			ft_add_env(cmd->cmd[i], data);
 	}
-	g_excode = 0;
+	i = -1;
+	while (cmd->cmd[++i])
+		if (valid_identifier(cmd->cmd[i], 1))
+			g_excode = 1;
+	else
+		g_excode = 0;
 }
