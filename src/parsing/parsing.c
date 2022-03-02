@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:02:28 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:15:52 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:35:33 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ void	find_path(char **paths, char *cmd, char *s)
 {
 	int	x;
 
+	if ((stlen(cmd) > 1 && !ft_strncmp(cmd, "./", 2))
+		|| (cmd[0] && cmd[0] == '/')
+		|| (stlen(cmd) > 2 && !ft_strncmp(cmd, "../", 3)))
+	{
+		ft_strcpy(s, cmd);
+		return ;
+	}
 	x = 0;
 	while (paths[x])
 	{
@@ -25,11 +32,6 @@ void	find_path(char **paths, char *cmd, char *s)
 		if (!access(s, F_OK))
 			return ;
 		x++;
-	}
-	if (stlen(cmd) > 1 && !ft_strncmp(cmd, "./", 2))
-	{
-		ft_strcpy(s, cmd);
-		return ;
 	}
 	ft_strcpy(s, "");
 }

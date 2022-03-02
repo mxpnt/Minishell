@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:27:53 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/01 15:02:37 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:45:00 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static t_env	*env_cpy_new(t_env env)
 	new->name = ft_strdup(env.name);
 	if (env.value)
 		new->value = ft_strdup(env.value);
+	else
+		new->value = NULL;
 	new->next = NULL;
 	return (new);
 }
@@ -74,6 +76,7 @@ static void	lst_clear_one_env(t_env **cpy, t_env *save)
 	(*cpy) = root;
 }
 
+// ici (peutetre)
 static void	ft_which_env(t_env **cpy)
 {
 	t_env	*save;

@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:18:24 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/01 15:12:13 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:14:29 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ static int	is_valid_exit(t_data *data)
 	return (0);
 }
 
+static void	exit_numeric(t_data *data)
+{
+	printf("minishell: exit: %s: numeric argument required\n", \
+	data->cmds->cmd[1]);
+	cmd_lstclear(data);
+	env_lstclear(data);
+	exit(255);
+}
+
 void	exit_builtin(t_data *data)
 {
 	if (data->nb_cmd == 1)
@@ -59,16 +68,16 @@ void	exit_builtin(t_data *data)
 		if (!data->cmds->cmd[1] || is_valid_exit(data) == 0)
 		{
 			data->run = 0;
-			g_excode = 0;
-		}
-		else if (is_valid_exit(data) == 1)
-		{
-			printf("minishell: exit: %s: numeric argument required\n", \
-			data->cmds->cmd[1]);
+			if (data->cmds->cmd[1])
+				g_excode = satoi(data->cmds->cmd[1]);
+			else
+				g_excode = 0;
 			cmd_lstclear(data);
 			env_lstclear(data);
-			exit(255);
+			exit(g_excode);
 		}
+		else if (is_valid_exit(data) == 1)
+			exit_numeric(data);
 		else if (is_valid_exit(data) == 2)
 		{
 			printf("minishell: exit: too many arguments\n");

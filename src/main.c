@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:24:33 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:12:46 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:52:59 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,20 @@ void	data_init(t_data *data, char **envp)
 	}
 }
 
+static void	ctrld_exit(t_data *data, char *prompt)
+{
+	write(1, "exit\n", 5);
+	env_lstclear(data);
+	free(prompt);
+	exit(0);
+}
+
 // fonction exit_ctrld if(!line)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 	char	*line;
-	char	*test;
+	char	*prompt;
 
 	(void) argc;
 	(void) argv;
@@ -38,10 +46,10 @@ int	main(int argc, char **argv, char **envp)
 	while (data.run)
 	{
 		signal_handler();
-		test = set_prompt(&data);
-		line = readline(test);
+		prompt = set_prompt(&data);
+		line = readline(prompt);
 		if (!line)
-			exit(0);
+			ctrld_exit(&data, prompt);
 		if (line && line[0])
 			add_history(line);
 		le_parsing(&data, line);
@@ -49,7 +57,7 @@ int	main(int argc, char **argv, char **envp)
 			pipex(data.cmds, &data);
 		cmd_lstclear(&data);
 		free(line);
-		free(test);
+		free(prompt);
 	}
 	env_lstclear(&data);
 }

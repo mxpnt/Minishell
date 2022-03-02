@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 08:58:18 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/01 15:02:16 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:07:45 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	cd_builtin(t_cmd *cmd, t_env *env)
 		home = ft_strdup(home_dir(env));
 		if (chdir(home) == -1)
 		{
-			perror("cd");
+			write(1, "minishell: cd: HOME not set\n", 28);
 			g_excode = 1;
 		}
 		else

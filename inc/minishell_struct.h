@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:55:30 by lsuau             #+#    #+#             */
-/*   Updated: 2022/02/22 11:31:38 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 09:03:28 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }	t_env;
+
 //in and out -> file name, null if not specified
 //red_in and red_out -> redirection type, 0 by default, 1 if double
 //red_in == -1 if file do not exist, file name will be in *in

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:02:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 12:57:13 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/02 13:13:14 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,25 @@ int	longest_in_tab(char **tab)
 		n++;
 	}
 	return (len);
+}
+
+short	satoi(char *str)
+{
+	short	res;
+	short	neg;
+
+	res = 0;
+	neg = 1;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			neg *= -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		res = res * 10 + (*str - 48);
+		str++;
+	}
+	return (res * neg);
 }

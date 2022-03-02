@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:03:19 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/01 15:02:44 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:50:02 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	pwd_builtin(t_env *env)
 		{
 			write(1, env->value, stlen(env->value));
 			write(1, "\n", 1);
-			return ;
+			break ;
 		}
 		env = env->next;
 	}

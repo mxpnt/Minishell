@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:53:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/01 15:01:48 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:13:17 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int				tablen(char **tab);
 void			write_nl(int fd, char *s);
 void			red_remove_quote(char *s);
 int				longest_in_tab(char **tab);
+short			satoi(char *str);
 
 // stock_4.c
 char			*ft_lower_case(char *str);
