@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:44:02 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/01 15:15:26 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:33:43 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**cmd_split(char *line);
 
 // env_in_line_2.c
 int		is_spe_env(char c, int dq);
-char	*put_value(char *line, int x, char *value);
+char	*put_value(char *line, int x, char *value, char c);
 
 // env_in_line.c
 int		check_env_char(char *line, int y);

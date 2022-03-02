@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_in_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:37:47 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:03:31 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:35:34 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,7 @@ char	*insert_value(char *line, int *x, int dq, char *value)
 		ft_strcpy(line + *x, line + y);
 		if (value)
 		{
-			line = put_value(line, *x, value);
-			if (line[*x + 1] == '?')
-				free(value);
+			line = put_value(line, *x, value, line[*x + 1]);
 			*x += stlen(value);
 		}
 	}

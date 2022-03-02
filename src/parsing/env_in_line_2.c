@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_in_line_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 13:52:53 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:03:29 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:35:53 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_spe_env(char c, int dq)
 	return (n);
 }
 
-char	*put_value(char *line, int x, char *value)
+char	*put_value(char *line, int x, char *value, char c)
 {
 	char	*s;
 	int		i;
@@ -48,5 +48,7 @@ char	*put_value(char *line, int x, char *value)
 	}
 	s[i + y] = 0;
 	free(line);
+	if (c == '?')
+		free(value);
 	return (s);
 }
