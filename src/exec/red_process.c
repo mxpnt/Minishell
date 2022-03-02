@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   red_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:17:55 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:03:17 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:45:32 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	in_x1_red(t_cmd *cmd, char *in, int n)
 {
-	if (access(in, F_OK))
+	if (access(in, F_OK) || access(in, R_OK))
 	{
 		if (!cmd->in)
 			cmd->in = ft_strdup(in);
