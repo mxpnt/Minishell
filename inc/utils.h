@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:53:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 13:54:10 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:29:26 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@ long long int	atolli(char *str);
 int				ft_nb_env(t_env *env);
 void			change_value_env(char *str, t_env *env);
 int				check_equal(char *str);
+
+// stock_6.c
+void			ft_putstr_fd(char *s, int fd);
 
 #endif

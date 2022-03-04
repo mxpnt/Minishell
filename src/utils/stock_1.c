@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:29:27 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 14:55:42 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:43:18 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 int	stcmp(const char *s1, const char *s2)
 {

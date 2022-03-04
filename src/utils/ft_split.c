@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 11:10:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/14 09:05:48 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:42:26 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 static int	ft_wordlen(const char *s, char c)
 {

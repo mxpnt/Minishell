@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:32:35 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:01:37 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:42:56 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <signal.h>
+# include <stdarg.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "minishell_struct.h"

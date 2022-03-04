@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:18:24 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 13:52:06 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:32:32 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ static int	is_valid_exit(t_cmd *cmd)
 
 static void	exit_numeric(t_data *data, t_cmd *cmd)
 {
-	printf("minishell: exit: %s: numeric argument required\n", \
-	cmd->cmd[1]);
+	write(2, "minishell: exit: ", 17);
+	ft_putstr_fd(cmd->cmd[1], 2);
+	write(2, " numeric argument required\n", 27);
 	g_excode = 255;
 	if (data->nb_cmd == 1)
 		exit(255);
@@ -67,7 +68,7 @@ static void	exit_numeric(t_data *data, t_cmd *cmd)
 void	exit_builtin(t_data *data, t_cmd *cmd)
 {
 	if (data->nb_cmd == 1)
-		write(1, "exit\n", 5);
+		write(2, "exit\n", 5);
 	if (!cmd->cmd[1] || is_valid_exit(cmd) == 0)
 	{
 		if (cmd->cmd[1])
@@ -81,7 +82,7 @@ void	exit_builtin(t_data *data, t_cmd *cmd)
 		exit_numeric(data, cmd);
 	else if (is_valid_exit(cmd) == 2)
 	{
-		printf("minishell: exit: too many arguments\n");
+		write(2, "minishell: exit: too many arguments\n", 36);
 		g_excode = 1;
 	}
 }

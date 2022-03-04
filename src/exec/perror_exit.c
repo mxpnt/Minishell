@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:42:23 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 09:44:56 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:45:46 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ft_perror_exit(const char *str, int code)
 
 void	ft_command_not_found(const char *str)
 {
-	// sortie d'erreur
-	printf("minishell: %s: command not found\n", str);
+	write(2, "minishell: ", 11);
+	ft_putstr_fd((char *)str, 2);
+	write(2, ": command not found\n", 20);
 	exit(127);
 }

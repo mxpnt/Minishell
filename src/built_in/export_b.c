@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:27:53 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 18:14:28 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 15:00:14 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,4 +123,5 @@ void	export_builtin(t_data *data, t_cmd *cmd)
 			g_excode = 1;
 	else
 		g_excode = 0;
+	envcpy_lstclear(cpy);
 }

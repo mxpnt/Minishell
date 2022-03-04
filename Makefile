@@ -6,7 +6,7 @@
 #    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/03/04 11:49:31 by mapontil         ###   ########.fr        #
+#    Updated: 2022/03/04 14:29:35 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ UTILS		=	ft_itoa.c \
 				stock_2.c \
 				stock_3.c \
 				stock_4.c \
-				stock_5.c
+				stock_5.c \
+				stock_6.c
 
 SRCS		=	${SRC} \
 				${addprefix built_in/, ${BUILT_IN}} \

@@ -6,11 +6,11 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 17:54:07 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/04 11:42:48 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:42:15 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "inc/minishell.h"
 
 static int	ft_cara_count(long long int *n, int *x)
 {

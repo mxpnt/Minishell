@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:46:31 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 18:12:10 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 15:09:20 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,14 @@ static int	check_env_dup(char *str, t_env *env)
 	while (env)
 	{
 		if (stcmp(env->name, name) == 0)
+		{
+			free(name);
 			return (1);
+		}
 		env = env->next;
 	}
+	if (name)
+		free(name);
 	return (0);
 }
 
