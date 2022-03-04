@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:40:41 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 17:48:19 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 17:41:39 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,8 @@ void	ft_handle_redirect_in(t_cmd *cmd)
 		close(fd_redi);
 	}
 	if (cmd->red_in == 1)
+	{
 		unlink(cmd->in);
+		exit(0);
+	}
 }

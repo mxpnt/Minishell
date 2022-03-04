@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:24:33 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/02 16:52:59 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 17:38:38 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	ctrld_exit(t_data *data, char *prompt)
 	exit(0);
 }
 
-// fonction exit_ctrld if(!line)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;

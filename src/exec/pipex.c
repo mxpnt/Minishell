@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:51:42 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 11:11:40 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 17:42:17 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	last_cmd_exec(t_cmd *cmd, t_data *data)
 {
-	if (!cmd->path[0] && !is_builtin(cmd->cmd[0]))
+	if (!cmd->path[0] && !is_builtin(cmd->cmd[0]) && cmd->red_in != 1)
 		ft_command_not_found(cmd->cmd[0]);
 	if (cmd->in)
 		ft_handle_redirect_in(cmd);
@@ -60,7 +60,7 @@ void	ft_exec(t_cmd *cmd, t_data *data)
 			ft_perror_exit("dup2", 0);
 		close(data->fd_prev);
 	}
-	if (!cmd->path[0] && !is_builtin(cmd->cmd[0]))
+	if (!cmd->path[0] && !is_builtin(cmd->cmd[0]) && cmd->red_in != 1)
 		ft_command_not_found(cmd->cmd[0]);
 	if (cmd->in)
 		ft_handle_redirect_in(cmd);

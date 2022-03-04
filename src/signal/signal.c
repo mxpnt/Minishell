@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:54:31 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 17:24:30 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 17:37:21 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	signal_handler(void)
 	tcsetattr(0, TCSANOW, &term);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, &signal_c);
+	term.c_lflag &= ECHOCTL;
 }
 
 void	signal_child(int signum)
