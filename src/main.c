@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:24:33 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/04 17:38:38 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:16:16 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	data_init(t_data *data, char **envp)
 
 static void	ctrld_exit(t_data *data, char *prompt)
 {
+	tcsetattr(0, TCSANOW, &data->term_base);
 	write(1, "exit\n", 5);
 	env_lstclear(data);
 	free(prompt);
