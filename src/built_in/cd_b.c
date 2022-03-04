@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 08:58:18 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 14:20:21 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:54:16 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,33 @@ static void	update_pwd(t_env *env)
 	update_oldpwd(env, old);
 }
 
-void	cd_builtin(t_cmd *cmd, t_env *env)
+static void	cd_home(t_env *env)
 {
 	char	*home;
 
-	if (!cmd->cmd[1])
+	home = ft_strdup(home_dir(env));
+	if (!home)
 	{
-		home = ft_strdup(home_dir(env));
-		if (chdir(home) == -1)
-		{
-			write(2, "minishell: cd: HOME not set\n", 28);
-			g_excode = 1;
-		}
-		else
-			g_excode = 0;
-		if (home)
-			free(home);
-		update_pwd(env);
+		write(2, "minishell: cd: HOME not set\n", 28);
+		g_excode = 1;
 	}
+	else if (chdir(home) == -1)
+	{
+		write(2, "minishell: cd: ", 15);
+		ft_putstr_fd(home, 2);
+		write(2, ": No such file or directory\n", 28);
+		g_excode = 1;
+	}
+	else
+		g_excode = 0;
+	if (home)
+		free(home);
+}
+
+void	cd_builtin(t_cmd *cmd, t_env *env)
+{
+	if (!cmd->cmd[1])
+		cd_home(env);
 	else if (chdir(cmd->cmd[1]) == -1)
 	{
 		perror("cd");

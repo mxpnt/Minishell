@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:18:24 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 14:32:32 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:22:05 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void	exit_builtin(t_data *data, t_cmd *cmd)
 	{
 		if (cmd->cmd[1])
 			g_excode = satoi(cmd->cmd[1]);
-		else
-			g_excode = 0;
 		if (data->nb_cmd == 1)
 			exit(g_excode);
 	}
