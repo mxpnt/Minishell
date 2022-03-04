@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:34:39 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/01 15:02:52 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 10:34:42 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,5 @@ void	wait_excode(int pid, int status)
 		write(1, "\n", 1);
 	}
 	else if (WIFEXITED(status))
-	{
 		g_excode = WEXITSTATUS(status);
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:51:42 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 17:51:34 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 11:11:40 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static void	last_cmd_exec(t_cmd *cmd, t_data *data)
 {
-	if (!cmd->path[0])
+	if (!cmd->path[0] && !is_builtin(cmd->cmd[0]))
 		ft_command_not_found(cmd->cmd[0]);
 	if (cmd->in)
 		ft_handle_redirect_in(cmd);
 	if (cmd->out)
 		ft_handle_redirect_out(cmd);
 	if (handle_builtin(cmd, data))
-		exit(0);
-	if (execve(cmd->path, cmd->cmd, cmd->envp) == -1)
+		exit(g_excode);
+	else if (execve(cmd->path, cmd->cmd, cmd->envp) == -1)
 		ft_perror_exit(cmd->cmd[0], 0);
 }
 
@@ -60,7 +60,7 @@ void	ft_exec(t_cmd *cmd, t_data *data)
 			ft_perror_exit("dup2", 0);
 		close(data->fd_prev);
 	}
-	if (!cmd->path[0])
+	if (!cmd->path[0] && !is_builtin(cmd->cmd[0]))
 		ft_command_not_found(cmd->cmd[0]);
 	if (cmd->in)
 		ft_handle_redirect_in(cmd);
@@ -68,13 +68,14 @@ void	ft_exec(t_cmd *cmd, t_data *data)
 		ft_handle_redirect_out(cmd);
 	else
 	{
-		if (dup2(data->fd[1], STDOUT_FILENO) == -1)
-			ft_perror_exit("dup2", 0);
+		if (is_builtin(cmd->cmd[0]) != 7)
+			if (dup2(data->fd[1], STDOUT_FILENO) == -1)
+				ft_perror_exit("dup2", 0);
 		close(data->fd[1]);
 	}
 	if (handle_builtin(cmd, data))
-		exit(0);
-	if (execve(cmd->path, cmd->cmd, cmd->envp) == -1)
+		exit(g_excode);
+	else if (execve(cmd->path, cmd->cmd, cmd->envp) == -1)
 		ft_perror_exit(cmd->cmd[0], 0);
 }
 

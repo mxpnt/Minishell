@@ -6,7 +6,7 @@
 #    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/03/02 18:02:41 by mapontil         ###   ########.fr        #
+#    Updated: 2022/03/04 11:49:31 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SIGNAL		=	signal.c \
 				signal2.c
 
 UTILS		=	ft_itoa.c \
+				ft_llitoa.c \
 				ft_split.c \
 				megajoin.c \
 				stock_1.c \

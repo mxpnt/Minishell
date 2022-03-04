@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:53:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 13:13:17 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:54:10 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 
 // ft_itoa.c
 char			*ft_itoa(long long int n);
+
+// ft_llitoa.c
+char			*ft_llitoa(long long int nbr);
 
 // ft_split.c
 char			**ft_split(char const *s, char c);
@@ -49,6 +52,8 @@ short			satoi(char *str);
 char			*ft_lower_case(char *str);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_userchr(t_data *data);
+int				size_wospace(char *str);
+char			*clear_cmd_space(char *str);
 
 // stock_5.c
 int				is_number(char *str);

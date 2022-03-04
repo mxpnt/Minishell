@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:02:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/02 13:13:14 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:51:34 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,23 @@ short	satoi(char *str)
 {
 	short	res;
 	short	neg;
+	int		i;
 
 	res = 0;
 	neg = 1;
-	if (*str == '-' || *str == '+')
+	i = 0;
+	while (str[i] == 32 || str[i] == 9)
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		if (*str == '-')
+		if (str[i] == '-')
 			neg *= -1;
-		str++;
+		i++;
 	}
-	while (*str >= '0' && *str <= '9')
+	while (str[i] >= '0' && str[i] <= '9' && str[i])
 	{
-		res = res * 10 + (*str - 48);
-		str++;
+		res = res * 10 + (str[i] - 48);
+		i++;
 	}
 	return (res * neg);
 }

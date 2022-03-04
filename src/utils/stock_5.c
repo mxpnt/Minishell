@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 09:58:08 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/23 09:13:26 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:41:04 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@ int	is_number(char *str)
 	int	i;
 
 	i = 0;
+	while (str[i] == 32 || str[i] == 9)
+		i++;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	if (!str[i])
 		return (1);
-	while (str[i])
-	{
-		if (!(str[i] >= '0' && str[i] <= '9'))
-			return (1);
+	while (str[i] >= '0' && str[i] <= '9')
 		i++;
-	}
+	if (str[i])
+		while (str[i] == 32 || str[i] == 9)
+			i++;
+	if (str[i])
+		return (1);
 	return (0);
 }
 
@@ -34,19 +37,23 @@ long long int	atolli(char *str)
 {
 	long long int	res;
 	long long int	neg;
+	int				i;
 
 	res = 0;
 	neg = 1;
-	if (*str == '-' || *str == '+')
+	i = 0;
+	while (str[i] == 32 || str[i] == 9)
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		if (*str == '-')
+		if (str[i] == '-')
 			neg *= -1;
-		str++;
+		i++;
 	}
-	while (*str >= '0' && *str <= '9')
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		res = res * 10 + (*str - 48);
-		str++;
+		res = res * 10 + (str[i] - 48);
+		i++;
 	}
 	return (res * neg);
 }

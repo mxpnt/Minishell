@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:05:51 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 17:32:10 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 10:54:48 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	which_builtin(t_cmd *cmd, t_data *data, int n)
 	else if (n == 6)
 		env_builtin(data->env);
 	else if (n == 7)
-		exit_builtin(data);
+		exit_builtin(data, cmd);
 }
 
 int	handle_builtin(t_cmd *cmd, t_data *data)

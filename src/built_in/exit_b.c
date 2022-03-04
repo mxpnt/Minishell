@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:18:24 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 13:14:29 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:52:06 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,58 +30,58 @@ static int	limit_arg_exit(t_cmd *cmd)
 {
 	long long int	nb;
 	char			*temp;
+	char			*clear_cmd;
 
 	nb = atolli(cmd->cmd[1]);
-	temp = ft_itoa(nb);
-	if (stcmp(cmd->cmd[1], temp))
+	temp = ft_llitoa(nb);
+	clear_cmd = clear_cmd_space(cmd->cmd[1]);
+	if (stcmp(clear_cmd, temp))
 	{
+		free(clear_cmd);
 		free(temp);
 		return (1);
 	}
+	free(clear_cmd);
 	free(temp);
 	return (0);
 }
 
-static int	is_valid_exit(t_data *data)
+static int	is_valid_exit(t_cmd *cmd)
 {
-	if (is_number(data->cmds->cmd[1]) || limit_arg_exit(data->cmds))
+	if (is_number(cmd->cmd[1]) || limit_arg_exit(cmd))
 		return (1);
-	if (nb_arg_exit(data->cmds))
+	if (nb_arg_exit(cmd))
 		return (2);
 	return (0);
 }
 
-static void	exit_numeric(t_data *data)
+static void	exit_numeric(t_data *data, t_cmd *cmd)
 {
 	printf("minishell: exit: %s: numeric argument required\n", \
-	data->cmds->cmd[1]);
-	cmd_lstclear(data);
-	env_lstclear(data);
-	exit(255);
+	cmd->cmd[1]);
+	g_excode = 255;
+	if (data->nb_cmd == 1)
+		exit(255);
 }
 
-void	exit_builtin(t_data *data)
+void	exit_builtin(t_data *data, t_cmd *cmd)
 {
 	if (data->nb_cmd == 1)
-	{
 		write(1, "exit\n", 5);
-		if (!data->cmds->cmd[1] || is_valid_exit(data) == 0)
-		{
-			data->run = 0;
-			if (data->cmds->cmd[1])
-				g_excode = satoi(data->cmds->cmd[1]);
-			else
-				g_excode = 0;
-			cmd_lstclear(data);
-			env_lstclear(data);
+	if (!cmd->cmd[1] || is_valid_exit(cmd) == 0)
+	{
+		if (cmd->cmd[1])
+			g_excode = satoi(cmd->cmd[1]);
+		else
+			g_excode = 0;
+		if (data->nb_cmd == 1)
 			exit(g_excode);
-		}
-		else if (is_valid_exit(data) == 1)
-			exit_numeric(data);
-		else if (is_valid_exit(data) == 2)
-		{
-			printf("minishell: exit: too many arguments\n");
-			g_excode = 1;
-		}
+	}
+	else if (is_valid_exit(cmd) == 1)
+		exit_numeric(data, cmd);
+	else if (is_valid_exit(cmd) == 2)
+	{
+		printf("minishell: exit: too many arguments\n");
+		g_excode = 1;
 	}
 }
