@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 09:58:08 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 15:07:51 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/05 15:28:57 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,6 @@ long long int	atolli(char *str)
 	return (res * neg);
 }
 
-int	ft_nb_env(t_env *env)
-{
-	int	i;
-
-	i = 0;
-	while (env)
-	{
-		i++;
-		env = env->next;
-	}
-	return (i);
-}
-
 void	change_value_env(char *str, t_env *env)
 {
 	char	*name;
@@ -104,4 +91,15 @@ int	check_equal(char *str)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	while (*s)
+	{
+		write(fd, s, 1);
+		s++;
+	}
 }

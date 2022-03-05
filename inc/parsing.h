@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:44:02 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/02 17:33:43 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/05 15:49:00 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void	env_lstadd_back(t_env **alst, t_env *new);
 void	env_lstclear(t_data *data);
 t_env	*env_init(t_data *data, char **envp);
 int		env_lstsize(t_env *env);
+
+// env_starter.c
+void	env_starter(t_env **env);
 
 // herdoc.c
 void	in_x2_name(t_cmd *cmd);

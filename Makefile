@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
+#    By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/03/04 14:29:35 by mapontil         ###   ########.fr        #
+#    Updated: 2022/03/05 15:32:07 by lsuau            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ PARSING		=	cmd_lst.c \
 				env_in_line.c \
 				env_in_line_2.c \
 				env.c \
+				env_starter.c \
 				parsing_error.c \
 				parsing_error_2.c \
 				parsing.c \
@@ -63,8 +64,7 @@ UTILS		=	ft_itoa.c \
 				stock_2.c \
 				stock_3.c \
 				stock_4.c \
-				stock_5.c \
-				stock_6.c
+				stock_5.c
 
 SRCS		=	${SRC} \
 				${addprefix built_in/, ${BUILT_IN}} \

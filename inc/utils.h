@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:53:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 14:29:26 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/05 16:36:53 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 // ft_itoa.c
 char			*ft_itoa(long long int n);
+int				ft_atoi(const char *str);
 
 // ft_llitoa.c
 char			*ft_llitoa(long long int nbr);
@@ -58,11 +59,8 @@ char			*clear_cmd_space(char *str);
 // stock_5.c
 int				is_number(char *str);
 long long int	atolli(char *str);
-int				ft_nb_env(t_env *env);
 void			change_value_env(char *str, t_env *env);
 int				check_equal(char *str);
-
-// stock_6.c
 void			ft_putstr_fd(char *s, int fd);
 
 #endif

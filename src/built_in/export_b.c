@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_b.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:27:53 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 15:00:14 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/05 13:39:51 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	export_builtin(t_data *data, t_cmd *cmd)
 	int		nb_env;
 
 	cpy = env_cpy(data->env);
-	nb_env = ft_nb_env(data->env);
+	nb_env = env_lstsize(data->env);
 	if (!cmd->cmd[1])
 	{
 		i = -1;

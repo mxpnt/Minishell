@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:02:28 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/02 12:35:33 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/05 16:43:52 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@ void	find_path(char **paths, char *cmd, char *s)
 {
 	int	x;
 
-	if ((stlen(cmd) > 1 && !ft_strncmp(cmd, "./", 2))
-		|| (cmd[0] && cmd[0] == '/')
-		|| (stlen(cmd) > 2 && !ft_strncmp(cmd, "../", 3)))
-	{
-		ft_strcpy(s, cmd);
-		return ;
-	}
 	x = 0;
 	while (paths[x])
 	{
@@ -41,6 +34,10 @@ char	*pathing(t_env *env, char *cmd)
 	char	**paths;
 	char	*s;
 
+	if ((stlen(cmd) > 1 && !ft_strncmp(cmd, "./", 2))
+		|| (cmd[0] && cmd[0] == '/')
+		|| (stlen(cmd) > 2 && !ft_strncmp(cmd, "../", 3)))
+		return (ft_strdup(cmd));
 	while (env && stcmp(env->name, "PATH"))
 		env = env->next;
 	if (!env || !cmd)

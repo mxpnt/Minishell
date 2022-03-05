@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:51:00 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:03:34 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/05 15:49:28 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ t_env	*env_init(t_data *data, char **envp)
 		env_lstadd_back(&env, t);
 		x++;
 	}
+	env_starter(&env);
 	return (env);
 }
 

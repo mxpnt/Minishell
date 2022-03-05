@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishellbis.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:17:45 by mapontil          #+#    #+#             */
-/*   Updated: 2022/02/28 12:36:41 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/05 13:40:21 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ char			*ft_userchr(t_data *data);
 // stock_5.c
 int				is_number(char *str);
 long long int	atolli(char *str);
-int				ft_nb_env(t_env *env);
 void			change_value_env(char *str, t_env *env);
 int				check_equal(char *str);
 
