@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:53:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/08 08:43:44 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/08 09:26:32 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 // ft_itoa.c
 char			*ft_itoa(long long int n);
-int				ft_atoi(const char *str);
 
 // ft_llitoa.c
 char			*ft_llitoa(long long int nbr);

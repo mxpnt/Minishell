@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 17:54:07 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/05 16:35:27 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/08 09:26:19 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,33 +59,4 @@ char	*ft_itoa(long long int n)
 		n /= 10;
 	}
 	return (res);
-}
-
-int	ft_atoi(const char *str)
-{
-	int		x;
-	long	res;
-	int		fact;
-
-	x = 0;
-	res = 0;
-	fact = 1;
-	while (str[x] == ' ' || (str[x] >= '\t' && str[x] <= '\r'))
-		x++;
-	if (str[x] == '-')
-	{
-		x++;
-		fact = -1;
-	}
-	else if (str[x] == '+')
-		x++;
-	while (str[x] >= '0' && str[x] <= '9')
-	{
-		res = res * 10 + str[x++] - '0';
-		if (res > 2147483648 && fact == -1)
-			return (0);
-		else if (res > 2147483647 && fact == 1)
-			return (-1);
-	}
-	return (res * fact);
 }
