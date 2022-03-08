@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:53:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/05 16:36:53 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/08 08:43:44 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ long long int	atolli(char *str);
 void			change_value_env(char *str, t_env *env);
 int				check_equal(char *str);
 void			ft_putstr_fd(char *s, int fd);
+
+// stock_6.c
+int				ft_atoi(const char *str);
 
 #endif

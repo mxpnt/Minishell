@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:44:02 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/05 15:49:00 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/08 08:40:46 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,19 @@ char	*search_env(t_env *env, char *line);
 char	*insert_value(char *line, int *x, int dq, char *value);
 int		replace_env_line(t_env *env, char **old_line);
 
+// env_starter.c
+t_env	*find_env(t_env *env, char *name);
+void	env_lstadd_back_2(t_env **env, char *name, char *value);
+int		check_shlvl_value(char *value);
+char	*update_shlvl(char *value);
+void	env_starter(t_env **env);
+
 // env.c
 t_env	*env_lstnew(const char *var);
 void	env_lstadd_back(t_env **alst, t_env *new);
 void	env_lstclear(t_data *data);
 t_env	*env_init(t_data *data, char **envp);
 int		env_lstsize(t_env *env);
-
-// env_starter.c
-void	env_starter(t_env **env);
 
 // herdoc.c
 void	in_x2_name(t_cmd *cmd);
