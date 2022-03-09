@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:02:28 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/05 16:43:52 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/09 17:51:52 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	find_path(char **paths, char *cmd, char *s)
 		ft_strcpy(s, paths[x]);
 		ft_strcat(s, "/");
 		ft_strcat(s, cmd);
-		if (!access(s, F_OK))
+		if (!access(s, X_OK))
 			return ;
 		x++;
 	}
@@ -33,19 +33,21 @@ char	*pathing(t_env *env, char *cmd)
 {
 	char	**paths;
 	char	*s;
+	char	buf[PATH_MAX];
 
-	if ((stlen(cmd) > 1 && !ft_strncmp(cmd, "./", 2))
-		|| (cmd[0] && cmd[0] == '/')
-		|| (stlen(cmd) > 2 && !ft_strncmp(cmd, "../", 3)))
+	if (ft_strrchr(cmd, '/') && !access(cmd, F_OK))
 		return (ft_strdup(cmd));
 	while (env && stcmp(env->name, "PATH"))
 		env = env->next;
-	if (!env || !cmd)
+	if (!cmd || cmd[0] == '/' || is_builtin(cmd))
 		return (ft_strdup(""));
-	paths = ft_split(env->value, ':');
+	if (env)
+		paths = ft_split(env->value, ':');
+	else
+		paths = ft_split(getcwd(buf, PATH_MAX), 0);
 	if (!paths)
 		return (0);
-	s = malloc(sizeof(char) * (longest_in_tab(paths) + stlen(cmd) + 1));
+	s = malloc(sizeof(char) * (longest_in_tab(paths) + stlen(cmd) + 2));
 	if (!s)
 		return (0);
 	find_path(paths, cmd, s);

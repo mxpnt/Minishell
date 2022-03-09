@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:50:04 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:03:37 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:02:53 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	heredoc_fork(t_env *env, char *name, char *del)
 	{
 		s = readline("> ");
 		if (!s)
-			exit(2);
+			exit(0);
 		if (replace_env_line(env, &s))
 			exit(1);
 		if (!stcmp(s, del))

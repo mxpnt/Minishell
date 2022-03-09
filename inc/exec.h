@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:39:04 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 10:33:57 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:33:35 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ void	last_cmd(t_cmd *cmd, t_data *data);
 void	ft_exec(t_cmd *cmd, t_data *data);
 void	pipex(t_cmd *cmd, t_data *data);
 
+// pipex2.c
+void	start_exec(t_cmd *cmd, t_data *data);
+
 // red_parsing.c
-int		process_in(t_cmd *cmd, char **in, t_data *data);
+int		process_in(t_cmd *cmd, char **in, int *n, t_data *data);
 void	empty_redout(char *out);
-int		process_out(t_cmd *cmd, char **out);
+int		process_out(t_cmd *cmd, char **out, int *n);
 int		red_parsing(t_data *data, t_cmd	*cmd, char *line);
 
 // red_process.c

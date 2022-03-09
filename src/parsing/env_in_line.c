@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:37:47 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/02 17:35:34 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/08 16:23:09 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*search_env(t_env *env, char *line)
 	while (env && x)
 	{
 		if (!ft_strncmp(line, env->name, x) && stlen(env->name) == x)
-			return (env->value);
+			return (ft_strdup(env->value));
 		env = env->next;
 	}
 	return (0);
@@ -60,8 +60,9 @@ char	*insert_value(char *line, int *x, int dq, char *value)
 		ft_strcpy(line + *x, line + y);
 		if (value)
 		{
-			line = put_value(line, *x, value, line[*x + 1]);
-			*x += stlen(value);
+			line = put_value(line, *x, value);
+			*x += stlen(value) + 2;
+			free(value);
 		}
 	}
 	return (line);

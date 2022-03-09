@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 14:28:58 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/05 16:45:50 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/08 14:37:11 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ char	*update_shlvl(char *value)
 		return (ft_strdup(""));
 	else if (v > 999)
 	{
-		printf("minishell: warning: shell level (%d) too high, \
-			resetting to 1\n", v + 1);
+		write(2, "minishell: warning: shell level (", 33);
+		ft_putstr_fd(ft_itoa(v + 1), 2);
+		write(2, ") too high, resetting to 1\n", 27);
 		return (ft_strdup("1"));
 	}
 	return (ft_itoa(v + 1));

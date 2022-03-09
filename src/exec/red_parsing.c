@@ -3,41 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   red_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:46:26 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:13:27 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/09 19:02:10 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/minishell.h"
 
-int	process_in(t_cmd *cmd, char **in, t_data *data)
+int	process_in(t_cmd *cmd, char **in, int *n, t_data *data)
 {
-	int	x;
 	int	r;
 	int	last;
 
+	r = 0;
 	last = tablen(in) - 1;
-	x = 0;
-	while (last >= 0 && in[x])
+	if (in[*n][1] == '<')
 	{
-		if (in[x][1] == '<')
-		{
-			if (heredoc_red(data, cmd, in[x] + 2, last - x))
-				return (1);
-		}
-		else
-		{
-			r = in_x1_red(cmd, in[x] + 1, last - x);
-			if (r == 1)
-				return (1);
-			else if (r == -1)
-				last = 0;
-		}
-		x++;
+		if (heredoc_red(data, cmd, in[*n] + 2, last - *n))
+			return (1);
 	}
-	return (0);
+	else
+	{
+		r = in_x1_red(cmd, in[*n] + 1, last - *n);
+	}
+	*n += 1;
+	return (r);
 }
 
 void	empty_redout(char *out)
@@ -48,31 +40,50 @@ void	empty_redout(char *out)
 	close(fd);
 }
 
-int	process_out(t_cmd *cmd, char **out)
+int	process_out(t_cmd *cmd, char **out, int *n)
+{
+	int	last;
+	int	r;
+
+	r = 0;
+	last = tablen(out) - 1;
+	cmd->red_out = remove_red(out[*n]);
+	if (!access(out[*n], F_OK))
+	{
+		if (access(out[*n], W_OK))
+			r = out_no_perm(cmd, out[*n]);
+		else if (*n == last)
+			cmd->out = ft_strdup(out[*n]);
+		else if (!cmd->red_out)
+			empty_redout(out[*n]);
+	}
+	else
+		out_no_file(cmd, out[*n], last - *n);
+	if ((last == *n || r == -1) && !cmd->out)
+		r = 1;
+	*n += 1;
+	return (r);
+}
+
+int	red_process(t_data	*data, t_cmd *cmd, char **in, char **out, char *order)
 {
 	int	x;
-	int	last;
+	int	n[2];
+	int	r;
 
-	last = tablen(out) - 1;
 	x = 0;
-	while (out[x] && last >= 0)
+	n[0] = 0;
+	n[1] = 0;
+	while (order[x])
 	{
-		cmd->red_out = remove_red(out[x]);
-		if (!access(out[x], F_OK))
-		{
-			if (access(out[x], W_OK))
-				last = out_no_perm(cmd, out[x]);
-			else if (x == last)
-				cmd->out = ft_strdup(out[x]);
-			else if (!cmd->red_out)
-				empty_redout(out[x]);
-		}
-		else
-			out_no_file(cmd, out[x], last - x);
+		if (order[x] == '<')
+			r = process_in(cmd, in, n, data);
+		else if (order[x] == '>')
+			r = process_out(cmd, out, n + 1);
+		if (r)
+			return (r + 1);
 		x++;
 	}
-	if (last >= 0 && !cmd->out)
-		return (1);
 	return (0);
 }
 
@@ -80,20 +91,15 @@ int	red_parsing(t_data *data, t_cmd	*cmd, char *line)
 {
 	char	**in;
 	char	**out;
+	char	*order;
 
+	order = red_order(line);
 	in = fill_red_tab(line, '<');
 	out = fill_red_tab(line, '>');
-	if ((!out && red_count(line, '>')) && (!in && red_count(line, '<')))
-	{
-		free_tab(in);
-		free_tab(out);
+	if (check_red_malloc(line, out, in, order))
 		return (1);
-	}
-	if (process_in(cmd, in, data))
-		return (1);
-	if (process_out(cmd, out))
-		return (1);
-	free_tab(in);
-	free_tab(out);
+	if (red_process(data, cmd, in, out, order))
+		return (red_multifree(in, out, order));
+	red_multifree(in, out, order);
 	return (0);
 }

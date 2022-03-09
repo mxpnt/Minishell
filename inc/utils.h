@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:53:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/05 16:36:53 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/09 18:44:12 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include "minishell_struct.h"
 
 // ft_itoa.c
-char			*ft_itoa(long long int n);
-int				ft_atoi(const char *str);
+char			*ft_itoa(int n);
 
 // ft_llitoa.c
 char			*ft_llitoa(long long int nbr);
@@ -62,5 +61,11 @@ long long int	atolli(char *str);
 void			change_value_env(char *str, t_env *env);
 int				check_equal(char *str);
 void			ft_putstr_fd(char *s, int fd);
+
+// stock_6.c
+int				ft_atoi(const char *str);
+int				check_red_malloc(char *line, char **out, char **in, char *order);
+char			*red_order(char *line);
+int				red_multifree(char **in, char **out, char *order);
 
 #endif

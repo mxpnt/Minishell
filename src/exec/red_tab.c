@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   red_tab.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:55:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:03:20 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/09 18:34:56 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ char	*red_substr(char *line, char c)
 		{
 			len = red_stlen(line + x);
 			red = ft_substr(line, x, len);
+			if (!red)
+				return (0);
 			ft_strcpy(line + x, line + x + len);
 			return (red);
 		}

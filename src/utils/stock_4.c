@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:22:56 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 14:30:04 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/08 16:31:33 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*ft_strrchr(const char *s, int c)
 	int	i;
 
 	i = stlen(s);
+	if (!s)
+		return (0);
 	while (i >= 0)
 	{
 		if (s[i] == (char)c)
