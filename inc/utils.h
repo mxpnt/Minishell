@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:53:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/09 18:44:12 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/10 16:25:22 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			ft_putstr_fd(char *s, int fd);
 
 // stock_6.c
 int				ft_atoi(const char *str);
-int				check_red_malloc(char *line, char **out, char **in, char *order);
+int				check_red_mall(char *line, char **out, char **in, char *order);
 char			*red_order(char *line);
 int				red_multifree(char **in, char **out, char *order);
 

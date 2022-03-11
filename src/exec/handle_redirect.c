@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:40:41 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/09 14:03:20 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/10 17:06:29 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static void	error_redirect_in(t_cmd *cmd)
 	if (access(cmd->in, F_OK))
 	{
 		write(2, "minishell: ", 11);
-		ft_putstr_fd(cmd->out, 2);
+		ft_putstr_fd(cmd->in, 2);
 		write(2, ": No such file or directory\n", 28);
 	}
 	else
 	{
 		write(2, "minishell: ", 11);
-		ft_putstr_fd(cmd->out, 2);
+		ft_putstr_fd(cmd->in, 2);
 		write(2, ": Permission denied\n", 20);
 	}
 	exit(1);

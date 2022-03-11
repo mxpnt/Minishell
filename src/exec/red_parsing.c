@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:46:26 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/09 19:02:10 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/10 16:25:00 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	process_out(t_cmd *cmd, char **out, int *n)
 	return (r);
 }
 
-int	red_process(t_data	*data, t_cmd *cmd, char **in, char **out, char *order)
+int	red_process(t_cmd *cmd, char **in, char **out, char *order)
 {
 	int	x;
 	int	n[2];
@@ -77,7 +77,7 @@ int	red_process(t_data	*data, t_cmd *cmd, char **in, char **out, char *order)
 	while (order[x])
 	{
 		if (order[x] == '<')
-			r = process_in(cmd, in, n, data);
+			r = process_in(cmd, in, n, cmd->data);
 		else if (order[x] == '>')
 			r = process_out(cmd, out, n + 1);
 		if (r)
@@ -87,7 +87,7 @@ int	red_process(t_data	*data, t_cmd *cmd, char **in, char **out, char *order)
 	return (0);
 }
 
-int	red_parsing(t_data *data, t_cmd	*cmd, char *line)
+int	red_parsing(t_cmd	*cmd, char *line)
 {
 	char	**in;
 	char	**out;
@@ -96,9 +96,9 @@ int	red_parsing(t_data *data, t_cmd	*cmd, char *line)
 	order = red_order(line);
 	in = fill_red_tab(line, '<');
 	out = fill_red_tab(line, '>');
-	if (check_red_malloc(line, out, in, order))
+	if (check_red_mall(line, out, in, order))
 		return (1);
-	if (red_process(data, cmd, in, out, order))
+	if (red_process(cmd, in, out, order))
 		return (red_multifree(in, out, order));
 	red_multifree(in, out, order);
 	return (0);

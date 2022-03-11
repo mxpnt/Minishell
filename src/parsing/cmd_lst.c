@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:30:25 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:03:24 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/10 16:20:48 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_cmd	*cmd_lstnew(t_data *data)
 	new->next = 0;
 	new->red_in = 0;
 	new->red_out = 0;
+	new->data = data;
 	if (!new->envp)
 	{
 		free(new);

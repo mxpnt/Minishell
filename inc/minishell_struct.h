@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:55:30 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/09 18:24:20 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/10 16:22:31 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_cmd
 	char			*out;
 	int				red_out;
 	char			**envp;
+	struct s_data	*data;
 	struct s_cmd	*next;
 }	t_cmd;
 

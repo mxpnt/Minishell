@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:39:04 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/09 18:33:35 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/10 16:23:04 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	start_exec(t_cmd *cmd, t_data *data);
 int		process_in(t_cmd *cmd, char **in, int *n, t_data *data);
 void	empty_redout(char *out);
 int		process_out(t_cmd *cmd, char **out, int *n);
-int		red_parsing(t_data *data, t_cmd	*cmd, char *line);
+int		red_parsing(t_cmd	*cmd, char *line);
 
 // red_process.c
 int		in_x1_red(t_cmd *cmd, char *in, int n);

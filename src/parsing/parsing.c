@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:02:28 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/09 17:51:52 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/11 14:53:17 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ int	cmd_parsing(t_data *data, char **line_split)
 		cmd_lstadd_back(&data->cmds, t);
 		if (replace_env_line(data->env, &line_split[x]))
 			return (cmd_lstclear(data));
-		if (red_parsing(data, t, line_split[x]))
+		if (red_parsing(t, line_split[x]))
 			return (cmd_lstclear(data));
 		t->cmd = cmd_split(line_split[x]);
 		if (!t->cmd)
 			return (cmd_lstclear(data));
+		remove_cmd_quotes(t->cmd);
 		t->path = pathing(data->env, t->cmd[0]);
 		if (!t->path)
 			return (cmd_lstclear(data));
-		remove_cmd_quotes(t->cmd);
 		x++;
 	}
 	data->nb_cmd = x;

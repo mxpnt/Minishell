@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:10:36 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/09 11:39:46 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/11 14:35:57 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	start_exec(t_cmd *cmd, t_data *data)
 			ft_perror_exit("dup2", 0);
 		close(data->fd_prev);
 	}
-	if (!cmd->path[0] && (cmd->in || cmd->out)
+	if (!is_builtin(cmd->cmd[0]) && !cmd->path[0] && (cmd->in || cmd->out)
 		&& cmd->red_in != -1 && cmd->red_out != -1)
 		exit(0);
 	else if (!cmd->path[0] && !is_builtin(cmd->cmd[0])

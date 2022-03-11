@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 08:42:47 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/09 18:50:10 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/10 16:25:55 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_atoi(const char *str)
 	return (res * fact);
 }
 
-int	check_red_malloc(char *line, char **out, char **in, char *order)
+int	check_red_mall(char *line, char **out, char **in, char *order)
 {
 	if ((!out && red_count(line, '>')) && (!in && red_count(line, '<')))
 	{

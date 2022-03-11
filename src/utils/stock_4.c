@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:22:56 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/08 16:31:33 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/10 17:08:39 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*ft_userchr(t_data *data)
 	char	*name;
 
 	curr = data->env;
+	name = 0;
 	if (!curr)
 		return (NULL);
 	while (curr)
@@ -60,6 +61,8 @@ char	*ft_userchr(t_data *data)
 			name = ft_strdup(curr->value);
 		curr = curr->next;
 	}
+	if (!name)
+		name = ft_strdup("tarnished");
 	return (name);
 }
 
