@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:50:04 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/09 13:02:53 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:02:54 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	heredoc_fork(t_env *env, char *name, char *del)
 		s = readline("> ");
 		if (!s)
 			exit(0);
-		if (replace_env_line(env, &s))
+		if (her_replace_env_line(env, &s))
 			exit(1);
 		if (!stcmp(s, del))
 		{

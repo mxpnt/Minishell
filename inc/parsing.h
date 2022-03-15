@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:44:02 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/08 16:23:39 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:54:19 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int		check_env_char(char *line, int y);
 char	*search_env(t_env *env, char *line);
 char	*insert_value(char *line, int *x, int dq, char *value);
 int		replace_env_line(t_env *env, char **old_line);
+
+// env_in_line_her.c
+int		her_replace_env_line(t_env *env, char **old_line);
 
 // env_starter.c
 t_env	*find_env(t_env *env, char *name);

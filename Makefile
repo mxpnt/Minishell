@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
+#    By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/03/15 15:44:47 by mapontil         ###   ########.fr        #
+#    Updated: 2022/03/15 15:53:36 by lsuau            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ PARSING		=	cmd_lst.c \
 				cmd_split.c \
 				env_in_line.c \
 				env_in_line_2.c \
+				env_in_line_her.c \
 				env.c \
 				env_starter.c \
 				parsing_error.c \
