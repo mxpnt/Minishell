@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_in_line_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 13:52:53 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/15 15:39:37 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:45:08 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	copy_value(char *s, char *value)
 {
 	int	x;
 	int	y;
-	
+
 	x = 0;
 	y = 0;
 	while (value[x])
@@ -62,8 +62,6 @@ char	*put_value(char *line, int x, char *value)
 	while (++i < x)
 		s[i] = line[i];
 	y = copy_value(s + i, value);
-	// while (value[++y])
-	// 	s[i + y] = value[y];
 	while (line[i])
 	{
 		s[i + y] = line[i];
