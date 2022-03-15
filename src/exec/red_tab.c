@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:55:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/09 18:34:56 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/15 14:57:11 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	**fill_red_tab(char *line, char c)
 		tab[n] = red_substr(line, c);
 		if (!tab[n])
 			return (free_tab(tab));
-		red_remove_quote(tab[n]);
+		//red_remove_quote(tab[n]);
 		n++;
 	}
 	return (tab);

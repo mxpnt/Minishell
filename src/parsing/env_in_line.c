@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_in_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:37:47 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/15 14:17:23 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:17:55 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*insert_value(char *line, int *x, int dq, char *value)
 		if (value)
 		{
 			line = put_value(line, *x, value);
-			*x += stlen(value) + 2;
+			*x += stlen(value) + nb_red(value);
 			free(value);
 		}
 	}
@@ -88,7 +88,6 @@ int	replace_env_line(t_env *env, char **old_line)
 			line = insert_value(line, &x, dq, search_env(env, line + x + 1));
 			if (!line)
 				return (1);
-			dprintf(1, "==%s\n", line);
 			*old_line = line;
 		}
 		else

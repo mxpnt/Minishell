@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:02:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/04 14:29:57 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:03:02 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	write_nl(int fd, char *s)
 	write(fd, "\n", 1);
 }
 
-void	red_remove_quote(char *s)
+char	*red_remove_quote(char *s)
 {
 	int	x;
 	int	y;
@@ -51,6 +51,7 @@ void	red_remove_quote(char *s)
 		else
 			x++;
 	}
+	return (s);
 }
 
 int	longest_in_tab(char **tab)

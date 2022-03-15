@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:53:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/10 16:25:22 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:20:59 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int				ft_strncmp(const char *s1, const char *s2, int n);
 // stock_3.c
 int				tablen(char **tab);
 void			write_nl(int fd, char *s);
-void			red_remove_quote(char *s);
+char			*red_remove_quote(char *s);
 int				longest_in_tab(char **tab);
 short			satoi(char *str);
 
@@ -67,5 +67,6 @@ int				ft_atoi(const char *str);
 int				check_red_mall(char *line, char **out, char **in, char *order);
 char			*red_order(char *line);
 int				red_multifree(char **in, char **out, char *order);
+int				nb_red(char *s);
 
 #endif

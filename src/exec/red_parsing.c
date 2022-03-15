@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:46:26 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/10 16:25:00 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:07:10 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	empty_redout(char *out)
 {
 	int	fd;
 
-	fd = open(out, O_WRONLY | O_TRUNC);
+	fd = open(red_remove_quote(out), O_WRONLY | O_TRUNC);
 	close(fd);
 }
 
