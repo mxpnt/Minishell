@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_in_line_her.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:49:31 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/15 15:52:20 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/16 09:47:38 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	her_replace_env_line(t_env *env, char **old_line)
 			dq = (dq + 1) % 2;
 		if (line[x] == '$')
 		{
-			line = her_insert_value(line, &x, dq, search_env(env, line + x + 1));
+			line = her_insert_value(line, &x, dq, \
+			search_env(env, line + x + 1));
 			if (!line)
 				return (1);
 			*old_line = line;
