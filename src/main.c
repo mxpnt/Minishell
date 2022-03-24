@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:24:33 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/09 13:34:40 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:21:17 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	data_init(t_data *data, char **envp)
 	data->cmds = 0;
 	data->nb_cmd = 0;
 	data->run = 1;
+	data->pwd = 0;
 	if (tcgetattr(0, &data->term_base) == -1)
 	{
 		perror("tcgetattr");
@@ -63,4 +64,5 @@ int	main(int argc, char **argv, char **envp)
 		free(prompt);
 	}
 	env_lstclear(&data);
+	free(data.pwd);
 }

@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:55:30 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/10 16:22:31 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/23 13:35:06 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_data
 	int				fd[2];
 	int				fd_prev;
 	int				run;
+	char			*pwd;
 	struct termios	term_base;
 }	t_data;
 

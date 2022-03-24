@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:17:55 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/15 15:06:32 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/24 13:28:50 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int	in_x1_red(t_cmd *cmd, char *in, int n)
 {
+	replace_env_line(cmd->data->env, &in);
 	if (access(in, F_OK) || access(in, R_OK))
 	{
-		cmd->in = ft_strdup(red_remove_quote(in));
+		cmd->in = ft_strdup(in);
 		if (!cmd->in)
 			return (1);
 		cmd->red_in = -1;
@@ -24,7 +25,7 @@ int	in_x1_red(t_cmd *cmd, char *in, int n)
 	}
 	if (!n)
 	{
-		cmd->in = ft_strdup(red_remove_quote(in));
+		cmd->in = ft_strdup(in);
 		if (!cmd->in)
 			return (1);
 	}
@@ -34,7 +35,7 @@ int	in_x1_red(t_cmd *cmd, char *in, int n)
 int	out_no_perm(t_cmd *cmd, char *out)
 {
 	cmd->red_out = -1;
-	cmd->out = ft_strdup(red_remove_quote(out));
+	cmd->out = ft_strdup(out);
 	return (-1);
 }
 
@@ -42,7 +43,7 @@ void	out_no_file(t_cmd *cmd, char *out, int n)
 {
 	int	fd;
 
-	fd = open(red_remove_quote(out), O_CREAT, 0644);
+	fd = open(out, O_CREAT, 0644);
 	close(fd);
 	if (!n)
 		cmd->out = ft_strdup(out);

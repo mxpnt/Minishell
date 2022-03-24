@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:02:28 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/15 15:08:31 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/23 14:08:20 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int	cmd_parsing(t_data *data, char **line_split)
 		if (!t)
 			return (cmd_lstclear(data));
 		cmd_lstadd_back(&data->cmds, t);
-		if (replace_env_line(data->env, &line_split[x]))
-			return (cmd_lstclear(data));
 		if (red_parsing(t, line_split[x]))
+			return (cmd_lstclear(data));
+		if (replace_env_line(data->env, &line_split[x]))
 			return (cmd_lstclear(data));
 		t->cmd = cmd_split(line_split[x]);
 		if (!t->cmd)
@@ -84,6 +84,21 @@ int	cmd_parsing(t_data *data, char **line_split)
 	return (0);
 }
 
+int	update_old_pwd(char **pwd)
+{
+	char	buf[PATH_MAX];
+
+	if (getcwd(buf, PATH_MAX))
+	{
+		if (*pwd)
+			free(*pwd);
+		*pwd = ft_strdup(buf);
+		if (!*pwd)
+			return (1);
+	}
+	return (0);
+}
+
 //quote only on red in env instead of all the env
 int	le_parsing(t_data *data, char *line)
 {
@@ -93,7 +108,7 @@ int	le_parsing(t_data *data, char *line)
 	if (!line || check_quote_n_pipe(line) || check_red(line))
 		return (1);
 	line_split = pipe_split(line);
-	if (!line_split)
+	if (!line_split || update_old_pwd(&data->pwd))
 		return (mess_error(0, 0, 1));
 	if (cmd_parsing(data, line_split))
 	{

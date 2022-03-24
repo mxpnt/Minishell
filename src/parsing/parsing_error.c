@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 18:30:04 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/01 15:15:19 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:11:23 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	mess_error(char c, const char *s, int n)
 			g_excode = 0;
 		else if (g_excode == 256)
 			g_excode = 1;
-		else
+		else if (g_excode != 258)
 		{
 			g_excode = 1;
 			write(2, "minimush: malloc error\n", 23);

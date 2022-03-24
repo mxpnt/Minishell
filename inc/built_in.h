@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:34:52 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 15:00:32 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:35:55 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		valid_identifier(char *str, int mod);
 void	envcpy_lstclear(t_env *cpy);
 
 // pwd_b.c
-void	pwd_builtin(void);
+void	pwd_builtin(char *pwd);
 
 // unset_b.c
 void	unset_builtin(t_cmd *cmd, t_env **env);

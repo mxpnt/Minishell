@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:02:49 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/15 15:03:02 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/24 13:28:27 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,10 @@ void	write_nl(int fd, char *s)
 	write(fd, "\n", 1);
 }
 
-char	*red_remove_quote(char *s)
+char	**red_env(t_env *env, char **tab, int n)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (s[x])
-	{
-		if (s[x] == '\'' || s[x] == '"')
-		{
-			y = skip_quote(s, x);
-			ft_strcpy(s + x, s + x + 1);
-			ft_strcpy(s + y - 1, s + x + y);
-			x = y - 1;
-		}
-		else
-			x++;
-	}
-	return (s);
+	replace_env_line(env, tab + n);
+	return (tab);
 }
 
 int	longest_in_tab(char **tab)

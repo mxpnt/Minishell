@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_builtins.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:05:51 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/04 10:54:48 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:34:57 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	which_builtin(t_cmd *cmd, t_data *data, int n)
 	else if (n == 2)
 		cd_builtin(cmd, data->env);
 	else if (n == 3)
-		pwd_builtin();
+		pwd_builtin(data->pwd);
 	else if (n == 4)
 		export_builtin(data, cmd);
 	else if (n == 5)

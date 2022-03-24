@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:46:26 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/15 15:07:10 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/24 13:26:43 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	empty_redout(char *out)
 {
 	int	fd;
 
-	fd = open(red_remove_quote(out), O_WRONLY | O_TRUNC);
+	fd = open(out, O_WRONLY | O_TRUNC);
 	close(fd);
 }
 
@@ -79,7 +79,7 @@ int	red_process(t_cmd *cmd, char **in, char **out, char *order)
 		if (order[x] == '<')
 			r = process_in(cmd, in, n, cmd->data);
 		else if (order[x] == '>')
-			r = process_out(cmd, out, n + 1);
+			r = process_out(cmd, red_env(cmd->data->env, out, n[1]), n + 1);
 		if (r)
 			return (r + 1);
 		x++;
@@ -98,6 +98,11 @@ int	red_parsing(t_cmd	*cmd, char *line)
 	out = fill_red_tab(line, '>');
 	if (check_red_mall(line, out, in, order))
 		return (1);
+	if (check_ambiguous(cmd, out) || check_ambiguous(cmd, in))
+	{
+		red_multifree(in, out, order);
+		return (0);
+	}
 	if (red_process(cmd, in, out, order))
 		return (red_multifree(in, out, order));
 	red_multifree(in, out, order);

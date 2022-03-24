@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:37:47 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/15 15:17:55 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/23 12:33:44 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,30 @@ char	*insert_value(char *line, int *x, int dq, char *value)
 	return (line);
 }
 
+static int	check_quote(char *line)
+{
+	int	x;
+	int	sq;
+	int	dq;
+
+	sq = 0;
+	dq = 0;
+	x = 0;
+	while (line[x])
+	{
+		if (line[x] == '\'' && !(dq % 2))
+			sq++;
+		else if (line[x] == '"' && !(sq % 2))
+			dq++;
+		x++;
+	}
+	if (sq % 2)
+		return (mess_error('\'', 0, 0));
+	if (dq % 2)
+		return (mess_error('"', 0, 0));
+	return (0);
+}
+
 int	replace_env_line(t_env *env, char **old_line)
 {
 	int		x;
@@ -93,5 +117,5 @@ int	replace_env_line(t_env *env, char **old_line)
 		else
 			x++;
 	}
-	return (0);
+	return (check_quote(*old_line));
 }
