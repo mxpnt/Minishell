@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:53:57 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/24 13:29:03 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/04/05 16:50:04 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ int				nb_red(char *s);
 
 // stock_7.c
 int				check_ambiguous(t_cmd *cmd, char **line);
+void			replace_tab(char **line);
 
 #endif

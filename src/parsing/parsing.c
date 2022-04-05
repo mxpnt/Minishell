@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:02:28 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/23 14:08:20 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/04/05 16:48:02 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	update_old_pwd(char **pwd)
 	return (0);
 }
 
-//quote only on red in env instead of all the env
 int	le_parsing(t_data *data, char *line)
 {
 	char	**line_split;
@@ -110,6 +109,7 @@ int	le_parsing(t_data *data, char *line)
 	line_split = pipe_split(line);
 	if (!line_split || update_old_pwd(&data->pwd))
 		return (mess_error(0, 0, 1));
+	replace_tab(line_split);
 	if (cmd_parsing(data, line_split))
 	{
 		free_tab(line_split);

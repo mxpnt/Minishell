@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 13:52:53 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/23 15:14:15 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/04/05 15:36:53 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,7 @@ int	copy_value(char *s, char *value)
 	y = 0;
 	while (value[x])
 	{
-		// if (value[x] == '>' || value[x] == '<')
-		// {
-		// 	s[x + y] = '"';
-		// 	s[x + y + 1] = value[x];
-		// 	s[x + y + 2] = '"';
-		// 	y += 2;
-		// }
-		// else
-			s[x + y] = value[x];
+		s[x + y] = value[x];
 		x++;
 	}
 	return (x + y);
