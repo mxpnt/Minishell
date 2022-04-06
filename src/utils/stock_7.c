@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_7.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:41:11 by lsuau             #+#    #+#             */
-/*   Updated: 2022/04/05 16:50:18 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:19:40 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ int	space_between(char *s)
 	return (0);
 }
 
+char	*red_name(char *name)
+{
+	int		x;
+	char	c;
+
+	x = 0;
+	c = name[x];
+	while (name[x] == c && x < 2)
+		x++;
+	return (name + x);
+}
+
 int	check_ambiguous(t_cmd *cmd, char **tab)
 {
 	int		n;
@@ -42,7 +54,7 @@ int	check_ambiguous(t_cmd *cmd, char **tab)
 		{
 			free(t);
 			cmd->red_in = -2;
-			cmd->in = ft_strdup(tab[n]);
+			cmd->in = ft_strdup(red_name(tab[n]));
 			return (1);
 		}
 		free(t);

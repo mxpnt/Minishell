@@ -6,7 +6,7 @@
 /*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:51:42 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/28 11:31:14 by mapontil         ###   ########.fr       */
+/*   Updated: 2022/04/06 15:17:35 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static void	last_cmd_exec(t_cmd *cmd, t_data *data)
 {
 	if (!is_builtin(cmd->cmd[0]) && !cmd->path[0] && (cmd->in || cmd->out)
 		&& cmd->red_in != -1 && cmd->red_in != -2 && cmd->red_out != -1
-		&& !cmd->cmd[0])
+		&& cmd->red_out != -2 && !cmd->cmd[0])
 		exit(0);
 	if (!cmd->path[0] && !is_builtin(cmd->cmd[0]) && (cmd->red_in != -1
-			&& cmd->red_in != -2 && cmd->red_out != -1))
+			&& cmd->red_in != -2 && cmd->red_out != -1 && cmd->red_out != -2))
 		ft_command_not_found(cmd->cmd[0]);
 	if (cmd->in || cmd->red_in == -2)
 		ft_handle_redirect_in(cmd);
-	if (cmd->out)
+	if (cmd->out || cmd->red_out == -2)
 		ft_handle_redirect_out(cmd);
 	if (handle_builtin(cmd, data))
 		exit(g_excode);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 14:39:04 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/23 15:25:48 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:09:55 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		process_out(t_cmd *cmd, char **out, int *n);
 int		red_parsing(t_cmd	*cmd, char *line);
 
 // red_process.c
-int		in_x1_red(t_cmd *cmd, char *in, int n);
+int		in_x1_red(t_cmd *cmd, char **in, int n);
 int		out_no_perm(t_cmd *cmd, char *out);
 void	out_no_file(t_cmd *cmd, char *out, int n);
 int		remove_red(char *out);

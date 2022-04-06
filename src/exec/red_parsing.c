@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   red_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 15:46:26 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/24 13:26:43 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:10:44 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	process_in(t_cmd *cmd, char **in, int *n, t_data *data)
 	}
 	else
 	{
-		r = in_x1_red(cmd, in[*n] + 1, last - *n);
+		r = in_x1_red(cmd, in + *n, last - *n);
 	}
 	*n += 1;
 	return (r);

@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   red_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:17:55 by lsuau             #+#    #+#             */
-/*   Updated: 2022/03/24 13:28:50 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:12:14 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/minishell.h"
 
-int	in_x1_red(t_cmd *cmd, char *in, int n)
+int	in_x1_red(t_cmd *cmd, char **ins, int n)
 {
-	replace_env_line(cmd->data->env, &in);
+	char	*in;
+
+	replace_env_line(cmd->data->env, ins);
+	in = *ins + 1;
 	if (access(in, F_OK) || access(in, R_OK))
 	{
 		cmd->in = ft_strdup(in);
