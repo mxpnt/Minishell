@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:40:41 by mapontil          #+#    #+#             */
-/*   Updated: 2022/03/10 17:06:29 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/03/28 11:30:40 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/minishell.h"
+
+static void	ft_handle_redirect_in2(t_cmd *cmd)
+{
+	write(2, "minishell: ", 11);
+	ft_putstr_fd(cmd->in, 2);
+	write(2, ": ambigous redirect\n", 20);
+	exit(1);
+}
 
 void	ft_handle_redirect_out(t_cmd *cmd)
 {
@@ -62,6 +70,8 @@ void	ft_handle_redirect_in(t_cmd *cmd)
 
 	if (cmd->red_in == -1)
 		error_redirect_in(cmd);
+	else if (cmd->red_in == -2)
+		ft_handle_redirect_in2(cmd);
 	if (cmd->red_in == 0 || cmd->red_in == 1)
 	{
 		fd_redi = open(cmd->in, O_RDONLY);
